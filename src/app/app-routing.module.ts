@@ -6,6 +6,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { PersonaComponent } from './persona/persona.component';
 import { TelefonosComponent } from './telefonos/telefonos.component';
 import { DireccionComponent } from './direccion/direccion.component';
+import { TablasComponent } from './tablas/tablas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'persona', component: PersonaComponent },
   { path: 'telefonos', component: TelefonosComponent },
   { path: 'direccion', component: DireccionComponent },
+  { path: 'tablas', component: TablasComponent },
 ];
 
 @NgModule({
