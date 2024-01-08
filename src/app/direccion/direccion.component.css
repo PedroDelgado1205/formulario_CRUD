@@ -1,0 +1,9 @@
+#direccion {
+    width: 80%;
+    margin: auto;
+    padding: auto;
+}
+
+#direccion #Guardar{
+    padding-left: 45%;
+}

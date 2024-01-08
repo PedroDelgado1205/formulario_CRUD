@@ -1,0 +1,9 @@
+#telefonos {
+    width: 80%;
+    margin: auto;
+    padding: auto;
+}
+
+#telefonos #IrDireccion{
+    padding-left: 45%;
+}

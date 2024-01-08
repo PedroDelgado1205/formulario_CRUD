@@ -1,0 +1,29 @@
+<section id="telefonos"> 
+    <div id="CodigoTelefono">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Código del teléfono</span>
+            <input [(ngModel)]="codiogoTelefono" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="CodigoPersona">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Código del dueño</span>
+            <input [(ngModel)]="codiogoDueno" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="NumeroTelefono">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Número de teléfono</span>
+            <input [(ngModel)]="numeroTelefono" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="Operadora">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Operadora</span>
+            <input [(ngModel)]="operadoraTelefono" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="IrDireccion">
+        <button type="button" class="btn btn-success" (click)="validar()">Siguiente</button>
+    </div>
+</section>

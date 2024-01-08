@@ -1,0 +1,41 @@
+<section id="direccion">
+    <div id="CodigoDireccion">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Código</span>
+            <input [(ngModel)]="codigoDireccion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="CodigoPersona">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Código del dueño</span>
+            <input [(ngModel)]="codigoDueno" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="Calle1">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Calle principal</span>
+            <input [(ngModel)]="callePrincipal" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="Calle2">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Calle secundaria</span>
+            <input [(ngModel)]="calleSecundaria" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="Sector">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Sector</span>
+            <input [(ngModel)]="sectorDierccion" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="NumeroCasa">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Número de la casa</span>
+            <input [(ngModel)]="numeroCasa" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </div>
+    <div id="Guardar">
+        <button type="button" class="btn btn-success" (click)="validar()">Guardar</button>
+    </div>
+</section>
