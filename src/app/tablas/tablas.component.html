@@ -1,58 +1,68 @@
-<section id="datosPersona">
-    <h2>Personas</h2>
-    <hr>
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th scope="col">Codigo</th>
-                <th scope="col">Celdula</th>
-                <th scope="col">Nombres</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Nacionalidad</th>
-            </tr>
-        </thead>
-        <tbody table-group-divider>
-            <tr>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-<section id="datosPersonaTelefono">
-    <h2>Telefonos</h2>
-    <hr>
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th scope="col">Codigo</th>
-                <th scope="col">Numero de telefono</th>
-                <th scope="col">Operadora</th>
-            </tr>
-        </thead>
-        <tbody table-group-divider>
-            <tr>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-<section id="datosPersonaDireccion">
-    <h2>Direccion</h2>
-    <hr>
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th scope="col">Codigo</th>
-                <th scope="col">calle Principal</th>
-                <th scope="col">calle Secundaria</th>
-                <th scope="col">Sector</th>
-                <th scope="col">Numero de casa</th>
-            </tr>
-        </thead>
-        <tbody table-group-divider>
-            <tr>
-            </tr>
-        </tbody>
-    </table>
+<section id="datos">
+    <section id="datosPersona">
+        <h4>Personas</h4>
+        <hr>
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Celdula</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Nacionalidad</th>
+                </tr>
+            </thead>
+            <tbody table-group-divider>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section id="datosPersonaTelefono">
+        <h4>Telefonos</h4>
+        <hr>
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Numero de telefono</th>
+                    <th scope="col">Operadora</th>
+                </tr>
+            </thead>
+            <tbody table-group-divider>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section id="datosPersonaDireccion">
+        <h4>Direccion</h4>
+        <hr>
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">calle Principal</th>
+                    <th scope="col">calle Secundaria</th>
+                    <th scope="col">Sector</th>
+                    <th scope="col">Numero de casa</th>
+                </tr>
+            </thead>
+            <tbody table-group-divider>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <section id="botonesCRUD">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button routerLink="/persona" type="button" class="btn btn-primary">Nuevo</button>
+            <button type="button" class="btn btn-primary">Actualizar</button>
+            <button type="button" class="btn btn-primary">Eliminar</button>
+        </div>
+    </section>
 </section>

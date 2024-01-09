@@ -1,0 +1,14 @@
+#datos {
+    width: 80%;
+    margin: auto;
+    padding: auto;
+}
+
+#datos #botonesCRUD{
+    padding-left: 35%;
+}
+
+.btn{
+    background-color: #426AA2;
+    border: #264570;
+}

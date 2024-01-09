@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-direccion',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
 
 export class DireccionComponent {
 
-  
+  constructor(private router: Router){}
 
   codigoDireccion!: number;
   codigoDueno!: number;
@@ -20,66 +21,108 @@ export class DireccionComponent {
 
   validar(){
     if((this.verificarCodigo() == true) && (this.verificarCodigoDueno() == true) && (this.verificarCalle1() == true) && (this.verificarCalle2() == true) && (this.verificarSector() == true) && (this.verificarNumeroCasa() == true)){
-      console.log('Guardando...');
+      this.router.navigate(['/tablas']);
     }
   }
 
   verificarCodigo(): boolean{
+    const codigo = document.getElementById('codigoDireccion');
     if((this.codigoDireccion == null)||(this.codigoDireccion == undefined)){
+      codigo?.classList.remove('form-control', 'is-valid');
+      codigo?.classList.add('form-control', 'is-invalid');
+      codigo?.setAttribute('placeholder','campo obligatorio');
       console.log('Campo obligatorio');
       return false;
     }else{
+      codigo?.classList.remove('form-control', 'is-invalid');
+      codigo?.classList.add('form-control', 'is-valid');
+      codigo?.setAttribute('placeholder','');
       console.log(this.codigoDireccion,'es un codigo valido');
       return true;
     }
   }
 
   verificarCodigoDueno(): boolean{
+    const codigoP = document.getElementById('codigoDueno');
     if((this.codigoDueno == null)||(this.codigoDueno == undefined)){
+      codigoP?.classList.remove('form-control', 'is-valid');
+      codigoP?.classList.add('form-control', 'is-invalid');
+      codigoP?.setAttribute('placeholder','campo obligatorio');
       console.log('Campo obligatorio');
       return false;
     }else{
+      codigoP?.classList.remove('form-control', 'is-invalid');
+      codigoP?.classList.add('form-control', 'is-valid');
+      codigoP?.setAttribute('placeholder','');
       console.log(this.codigoDueno,'es un codigo valido');
       return true;
     }
   }
 
   verificarCalle1(): boolean{
-    if((this.callePrincipal == null)||(this.callePrincipal == undefined)){
+    const calle1 = document.getElementById('callePrincipal');
+    if((this.callePrincipal == null)||(this.callePrincipal == undefined)||(this.callePrincipal == "")){
+      calle1?.classList.remove('form-control', 'is-valid');
+      calle1?.classList.add('form-control', 'is-invalid');
+      calle1?.setAttribute('placeholder','campo obligatorio');
       console.log('Campo obligatorio');
       return false;
     }else{
+      calle1?.classList.remove('form-control', 'is-invalid');
+      calle1?.classList.add('form-control', 'is-valid');
+      calle1?.setAttribute('placeholder','');
       console.log(this.callePrincipal);
       return true;
     }
   }
 
   verificarCalle2(): boolean{
+    const calle2 = document.getElementById('calleSecundaria');
     if((this.calleSecundaria == null)||(this.calleSecundaria == undefined)){
+      calle2?.classList.remove('form-control', 'is-valid');
+      calle2?.classList.add('form-control', 'is-invalid');
+      calle2?.setAttribute('placeholder','campo obligatorio');
       console.log('Campo obligatorio');
       return false;
     }else{
+      calle2?.classList.remove('form-control', 'is-invalid');
+      calle2?.classList.add('form-control', 'is-valid');
+      calle2?.setAttribute('placeholder','');
       console.log(this.calleSecundaria);
       return true;
     }
   }
 
   verificarSector(): boolean{
+    const sector = document.getElementById('sectorDierccion');
     if((this.sectorDierccion == null)||(this.sectorDierccion == undefined)){
+      sector?.classList.remove('form-control', 'is-valid');
+      sector?.classList.add('form-control', 'is-invalid');
+      sector?.setAttribute('placeholder','campo obligatorio');
       console.log('Campo obligatorio');
-      return true;
-    }else{
-      console.log(this.sectorDierccion);
       return false;
+    }else{
+      sector?.classList.remove('form-control', 'is-invalid');
+      sector?.classList.add('form-control', 'is-valid');
+      sector?.setAttribute('placeholder','');
+      console.log(this.sectorDierccion);
+      return true;
     }
   }
 
   verificarNumeroCasa(): boolean{
+    const numero = document.getElementById('numeroCasa');
     if((this.numeroCasa == null)||(this.numeroCasa == undefined)){
+      numero?.classList.remove('form-control', 'is-valid');
+      numero?.classList.add('form-control', 'is-invalid');
+      numero?.setAttribute('placeholder','campo obligatorio');
       console.log('Campo obligatorio');
       return false;
     }else{
-      console.log('El número de casa es',this.numeroCasa);
+      numero?.classList.remove('form-control', 'is-invalid');
+      numero?.classList.add('form-control', 'is-valid');
+      numero?.setAttribute('placeholder','');
+      console.log(this.numeroCasa);
       return true;
     }
   }

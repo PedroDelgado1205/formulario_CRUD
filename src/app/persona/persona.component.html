@@ -2,42 +2,42 @@
     <div id="Codigo">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Código</span>
-            <input [(ngModel)]="codigoPersona" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input [(ngModel)]="codigoPersona" id="codigoPersona" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
     <div id="Celdula">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Cédula</span>
-            <input [(ngModel)]="cedulaPersona" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input [(ngModel)]="cedulaPersona" id="cedulaPersona" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
     <div id="Nombres">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Nombres</span>
-            <input  [(ngModel)]="primerNombre" type="text" aria-label="Primer nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            <input  [(ngModel)]="segundoNombre" type="text" aria-label="Segundo nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input  [(ngModel)]="primerNombre" id="primerNombre" type="text" aria-label="Primer nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input  [(ngModel)]="segundoNombre" id="segundoNombre" type="text" aria-label="Segundo nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
     <div id="Apellidos">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Apellidos</span>
-            <input  [(ngModel)]="primerApellido" type="text" aria-label="Primer nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            <input  [(ngModel)]="segundoApellido" type="text" aria-label="Segundo nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input  [(ngModel)]="primerApellido" id="primerApellido" type="text" aria-label="Primer nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input  [(ngModel)]="segundoApellido" id="segundoApellido" type="text" aria-label="Segundo nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
     <div id="Edad">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Edad</span>
-            <input [(ngModel)]="edadPersona" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input [(ngModel)]="edadPersona" id="edadPersona" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
     <div id="Nacionalidad">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Nacionalidad</span>
-            <input [(ngModel)]="nacionalidadPersona" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input [(ngModel)]="nacionalidadPersona" id="nacionalidadPersona" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
     <div id="IrTelefono">
-        <button id="" type="button" class="btn btn-success" (click)="validar()">Siguiente</button>
+        <button id="" type="button" class="btn btn-primary" (click)="validar()">Siguiente</button>
     </div>
 </section>
