@@ -14,9 +14,8 @@ export class PersonaComponent {
   codigoPersona!: number;
   cedulaPersona!: string;
   primerNombre!: string;
-  segundoNombre!: string;
-  primerApellido!: string;
-  segundoApellido!: string;
+  nombresPersona!: string;
+  apellidosPersona!: string;
   edadPersona!: number;
   nacionalidadPersona!: string;
 
@@ -96,64 +95,47 @@ export class PersonaComponent {
   }
 
   verificarNombres(): boolean{
-    const nombre1 = document.getElementById('primerNombre');
-    const nombre2 = document.getElementById('segundoNombre');
-    if(((this.primerNombre == null)||(this.primerNombre == undefined))&&((this.segundoNombre == null)||(this.segundoNombre == undefined))){
-      nombre1?.classList.remove('form-control', 'is-valid');
-      nombre2?.classList.remove('form-control', 'is-valid');
-      nombre1?.classList.add('form-control', 'is-invalid');
-      nombre2?.classList.add('form-control', 'is-invalid');
-      nombre1?.setAttribute('placeholder', 'Campo obligatorio');
-      nombre2?.setAttribute('placeholder', 'Campo obligatorio');
+    const nombres = document.getElementById('nombresPersona');
+    if(((this.nombresPersona == null)||(this.nombresPersona == undefined))){
+      nombres?.classList.remove('form-control', 'is-valid');
+      nombres?.classList.add('form-control', 'is-invalid');
+      nombres?.setAttribute('placeholder', 'Campo obligatorio');
       console.log('Campos obligatorio');
       return false
     }else{
-      if((!/^[A-Za-z]+$/g.test(this.primerNombre)) && (!/^[A-Za-z]+$/g.test(this.segundoNombre))){
-        nombre1?.classList.remove('form-control', 'is-valid');
-        nombre2?.classList.remove('form-control', 'is-valid');
-        nombre1?.classList.add('form-control', 'is-invalid');
-        nombre2?.classList.add('form-control', 'is-invalid');
-        nombre1?.setAttribute('placeholder', 'Los nombres solo deben contener letras');
-        nombre2?.setAttribute('placeholder', 'Los nombres solo deben contener letras');
+      if((!/^[A-Za-z A-Za-z]+$/g.test(this.nombresPersona))){
+        nombres?.classList.remove('form-control', 'is-valid');
+        nombres?.classList.add('form-control', 'is-invalid');
+        nombres?.setAttribute('placeholder', 'Los nombres solo deben contener letras');
         console.log('Los nombres solo deben contener letras');
         return false;
       }else{
-        nombre1?.classList.remove('form-control', 'is-invalid');
-        nombre2?.classList.remove('form-control', 'is-invalid');
-        nombre1?.classList.add('form-control', 'is-valid');
-        nombre2?.classList.add('form-control', 'is-valid');
-        nombre1?.setAttribute('placeholder', '');
-        nombre2?.setAttribute('placeholder', '');        
-        console.log(this.primerNombre," ",this.segundoNombre);
+        nombres?.classList.remove('form-control', 'is-invalid');
+        nombres?.classList.add('form-control', 'is-valid');
+        nombres?.setAttribute('placeholder', '');     
+        console.log(this.nombresPersona);
         return true;
       }
     }
   }
 
   verificarApellidos(): boolean{
-    const apellido1 = document.getElementById('primerApellido')
-    const apellido2 = document.getElementById('segundoApellido')
-    if(((this.primerApellido == null)||(this.primerApellido == undefined))&&((this.segundoApellido == null)||(this.segundoApellido == undefined))){
-      apellido1?.classList.remove('form-control', 'is-valid');
-      apellido2?.classList.remove('form-control', 'is-valid');
-      apellido1?.classList.add('form-control', 'is-invalid');
-      apellido2?.classList.add('form-control', 'is-invalid');
+    const apellidos = document.getElementById('apellidosPersona');
+    if(((this.apellidosPersona == null)||(this.apellidosPersona == undefined))){
+      apellidos?.classList.remove('form-control', 'is-valid');
+      apellidos?.classList.add('form-control', 'is-invalid');
       console.log('Campo obligatorio');
       return false
     }else{
-      if((!/^[A-Za-z]+$/g.test(this.primerApellido))&&(!/^[A-Za-z]+$/g.test(this.segundoApellido))){
-        apellido1?.classList.remove('form-control', 'is-valid');
-        apellido2?.classList.remove('form-control', 'is-valid');
-        apellido1?.classList.add('form-control', 'is-invalid');
-        apellido2?.classList.add('form-control', 'is-invalid');
+      if((!/^[A-Za-z A-Za-z]+$/g.test(this.apellidosPersona))){
+        apellidos?.classList.remove('form-control', 'is-valid');
+        apellidos?.classList.add('form-control', 'is-invalid');
         console.log('Los apellidos solo deben contener letras');
         return false;
       }else{
-        apellido1?.classList.remove('form-control', 'is-invalid');
-        apellido2?.classList.remove('form-control', 'is-invalid');
-        apellido1?.classList.add('form-control', 'is-valid');
-        apellido2?.classList.add('form-control', 'is-valid');
-        console.log(this.primerApellido," ",this.segundoApellido);
+        apellidos?.classList.remove('form-control', 'is-invalid');
+        apellidos?.classList.add('form-control', 'is-valid');
+        console.log(this.apellidosPersona);
         return true;
       }
     }
