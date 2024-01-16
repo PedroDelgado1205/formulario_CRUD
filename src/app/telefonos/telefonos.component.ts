@@ -13,11 +13,13 @@ export class TelefonosComponent {
   numeroTelefono!: string;
   operadoraTelefono!: string;
 
-  constructor(private router: Router){}
+  constructor(private router: Router){
+  }
   
   validar(){
+
     if((this.verifiarCodigoTelefono() == true) && (this.verificarCodigoDueno() == true) && (this.verificarNumeroTelefono() == true) && (this.verificarOperadora() == true)){
-      this.router.navigate(['/direccion']);
+      this.router.navigate([`/direccion`]);
     }
   }
 
