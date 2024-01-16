@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'persona', component: PersonaComponent },
   { path: 'telefonos', component: TelefonosComponent },
   { path: 'direccion', component: DireccionComponent },
-  { path: '', component: TablasComponent },
+  { path: 'tablas', component: TablasComponent },
 ];
 
 @NgModule({

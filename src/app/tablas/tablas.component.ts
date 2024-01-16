@@ -8,11 +8,8 @@ import { Router } from '@angular/router';
 })
 
 export class TablasComponent {
-  constructor(private router: Router){}
-
   // APIurl = 'https://localhost:5001/api/Persona/personas'
+  // constructor(HttpClient : HTTP){
 
-  ngOnInit(): void{
-    
-  }
+  // }
 }

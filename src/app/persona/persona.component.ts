@@ -18,12 +18,12 @@ export class PersonaComponent {
   edadPersona!: number;
   nacionalidadPersona!: string;
 
-  persona!: Persona;
+  persona: Persona = new Persona;
 
   validar(){
     if((this.verificarCodigo()==true) && (this.verificarCedula()==true) && (this.verificarNombres()==true) && (this.verificarApellidos()==true) && (this.verificarEdad()==true) && (this.verificarNacionalidad()==true)){
-      console.log(this.persona.nacionalidad);
-      this.router.navigate([`/telefonos/${this.persona}src/app/persona/persona.component.ts`]);
+      console.log(this.persona);
+      this.router.navigate([`/telefonos`]);
     }
   }
 
@@ -186,3 +186,33 @@ export class PersonaComponent {
     }
   }
 }
+
+class Direccion {
+  codigo!: string;
+  codigoPersona!: string;
+  callePrincipal!: string;
+  calleSecundaria!: string;
+  sector!: string;
+  numero!: string;
+}
+
+class Telefono {
+  codigo!: string;
+  codigoPersona!: string;
+  numero!: string;
+  operadora!: string;
+}
+
+class Persona {
+  codigo!: string;
+  cedula!: string;
+  nombre!: string;
+  apellido!: string;
+  edad!: number;
+  nacionalidad!: string;
+
+  telefono: Telefono = new Telefono;
+
+  direccion: Direccion = new Direccion;
+}
+

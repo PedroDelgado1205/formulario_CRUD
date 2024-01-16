@@ -8,17 +8,20 @@ import { Router } from '@angular/router';
 })
 export class TelefonosComponent {
 
-  codiogoTelefono!: number;
-  codiogoDueno!: number;
+  constructor(private router: Router){
+  }
+
+  codiogoTelefono!: string;
+  codiogoDueno!: string;
   numeroTelefono!: string;
   operadoraTelefono!: string;
 
-  constructor(private router: Router){
-  }
+  persona : Persona = new Persona;
   
   validar(){
 
     if((this.verifiarCodigoTelefono() == true) && (this.verificarCodigoDueno() == true) && (this.verificarNumeroTelefono() == true) && (this.verificarOperadora() == true)){
+      console.log(this.persona.telefono);
       this.router.navigate([`/direccion`]);
     }
   }
@@ -36,6 +39,7 @@ export class TelefonosComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codiogoTelefono, 'es un codigo valido');
+      this.persona.telefono.codigo = this.codiogoTelefono;
       return true;
     }
   }
@@ -53,6 +57,7 @@ export class TelefonosComponent {
       codigoP?.classList.add('form-control', 'is-valid');
       codigoP?.setAttribute('placeholder','');
       console.log(this.codiogoDueno, 'es un codigo valido');
+      this.persona.telefono.codigoPersona = this.codiogoDueno;
       return true;
     }
   }
@@ -77,6 +82,7 @@ export class TelefonosComponent {
         numero?.classList.add('form-control', 'is-valid');
         numero?.setAttribute('placeholder','');
         console.log(this.numeroTelefono);
+        this.persona.telefono.numero = this.numeroTelefono;
         return true;
       }
     }
@@ -102,8 +108,39 @@ export class TelefonosComponent {
       operadora?.classList.add('form-control', 'is-valid');
       operadora?.setAttribute('placeholder','');
         console.log(this.operadoraTelefono,'es una operadora valida');
+        this.persona.telefono.operadora = this.operadoraTelefono;
         return true;
       }
     }
   }
 }
+
+class Direccion {
+  codigo!: string;
+  codigoPersona!: string;
+  callePrincipal!: string;
+  calleSecundaria!: string;
+  sector!: string;
+  numero!: string;
+}
+
+class Telefono {
+  codigo!: string;
+  codigoPersona!: string;
+  numero!: string;
+  operadora!: string;
+}
+
+class Persona {
+  codigo!: string;
+  cedula!: string;
+  nombre!: string;
+  apellido!: string;
+  edad!: number;
+  nacionalidad!: string;
+
+  telefono: Telefono = new Telefono;
+
+  direccion: Direccion = new Direccion;
+}
+
