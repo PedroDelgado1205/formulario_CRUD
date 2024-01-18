@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-persona',
   templateUrl: './persona.component.html',
@@ -8,8 +7,10 @@ import { Router } from '@angular/router';
 })
 
 export class PersonaComponent {
+  static persona: Persona;
 
   constructor(private router: Router){}
+
 
   codigoPersona!: string;
   cedulaPersona!: string;
@@ -23,7 +24,7 @@ export class PersonaComponent {
   validar(){
     if((this.verificarCodigo()==true) && (this.verificarCedula()==true) && (this.verificarNombres()==true) && (this.verificarApellidos()==true) && (this.verificarEdad()==true) && (this.verificarNacionalidad()==true)){
       console.log(this.persona);
-      this.router.navigate([`/telefonos`]);
+      this.router.navigate([`/telefonos/${this.persona}`]);
     }
   }
 
@@ -40,7 +41,7 @@ export class PersonaComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoPersona,' es un codigo valido');
-      this.persona.codigo = this.codigoPersona;
+      this.persona.codigoPersona = this.codigoPersona;
       return true;
     }
   }
@@ -85,7 +86,7 @@ export class PersonaComponent {
           cedula?.classList.add('form-control', 'is-valid');
           cedula?.setAttribute('placeholder', '');
           console.log('La cedula: ', this.cedulaPersona, ' es verdadera');
-          this.persona.cedula = this.cedulaPersona;
+          this.persona.cedulaPersona = this.cedulaPersona;
           return true;
         }else{
           cedula?.classList.remove('form-control', 'is-valid');
@@ -118,7 +119,7 @@ export class PersonaComponent {
         nombres?.classList.add('form-control', 'is-valid');
         nombres?.setAttribute('placeholder', '');     
         console.log(this.nombresPersona);
-        this.persona.nombre = this.nombresPersona;
+        this.persona.nombresPersona = this.nombresPersona;
         return true;
       }
     }
@@ -141,7 +142,7 @@ export class PersonaComponent {
         apellidos?.classList.remove('form-control', 'is-invalid');
         apellidos?.classList.add('form-control', 'is-valid');
         console.log(this.apellidosPersona);
-        this.persona.apellido = this.apellidosPersona;
+        this.persona.apellidosPersona = this.apellidosPersona;
         return true;
       }
     }
@@ -158,7 +159,7 @@ export class PersonaComponent {
       edad?.classList.remove('form-control', 'is-invalid');
       edad?.classList.add('form-control', 'is-valid');
       console.log(this.edadPersona);
-      this.persona.edad = this.edadPersona;
+      this.persona.edadPersona = this.edadPersona;
       return true;
     }
   }
@@ -180,7 +181,7 @@ export class PersonaComponent {
         nacionalidad?.classList.remove('form-control', 'is-invalid');
         nacionalidad?.classList.add('form-control', 'is-valid');
         console.log(this.nacionalidadPersona);
-        this.persona.nacionalidad = this.nacionalidadPersona;
+        this.persona.nacionalidadPersona = this.nacionalidadPersona;
         return true;
       }
     }
@@ -188,28 +189,28 @@ export class PersonaComponent {
 }
 
 class Direccion {
-  codigo!: string;
+  codigoDireccion!: string;
   codigoPersona!: string;
   callePrincipal!: string;
   calleSecundaria!: string;
-  sector!: string;
-  numero!: string;
+  sectorDireccion!: string;
+  numeroCasa!: string;
 }
 
 class Telefono {
-  codigo!: string;
+  codigoTelefono!: string;
   codigoPersona!: string;
-  numero!: string;
-  operadora!: string;
+  numeroTelefono!: string;
+  operadoraTelefono!: string;
 }
 
 class Persona {
-  codigo!: string;
-  cedula!: string;
-  nombre!: string;
-  apellido!: string;
-  edad!: number;
-  nacionalidad!: string;
+  codigoPersona!: string;
+  cedulaPersona!: string;
+  nombresPersona!: string;
+  apellidosPersona!: string;
+  edadPersona!: number;
+  nacionalidadPersona!: string;
 
   telefono: Telefono = new Telefono;
 

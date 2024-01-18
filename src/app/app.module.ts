@@ -8,6 +8,7 @@ import { PersonaComponent } from './persona/persona.component';
 import { TelefonosComponent } from './telefonos/telefonos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TablasComponent } from './tablas/tablas.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TablasComponent } from './tablas/tablas.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,11 +9,11 @@ import { DireccionComponent } from './direccion/direccion.component';
 import { TablasComponent } from './tablas/tablas.component';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/tablas', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent },
   { path: 'persona', component: PersonaComponent },
-  { path: 'telefonos', component: TelefonosComponent },
-  { path: 'direccion', component: DireccionComponent },
+  { path: 'telefonos/:pe', component: TelefonosComponent },
+  { path: 'direccion/:pe', component: DireccionComponent },
   { path: 'tablas', component: TablasComponent },
 ];
 

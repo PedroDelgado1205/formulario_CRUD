@@ -3,7 +3,7 @@
     <section id="datosPersona">
         <h4>Personas</h4>
         <hr>
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered table-sm" ngForm="personaAPI">
             <thead>
                 <tr>
                     <th scope="col">Codigo</th>
@@ -12,10 +12,18 @@
                     <th scope="col">Apellidos</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Nacionalidad</th>
+                    <th scope="col">Seleccionar</th>
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr>
+                <tr *ngFor="let i of datosP.data">
+                    <td> {{ i.codigoPersona }} </td>
+                    <td> {{ i.cedulaPersona }} </td>
+                    <td> {{ i.nombresPersona }} </td>
+                    <td> {{ i.apellidosPersona }} </td>
+                    <td> {{ i.edadPersona }} </td>
+                    <td> {{ i.nacionalidadPersona }} </td>
+                    <td> <button (click)="TelefonDireccion(i.codigoPersona)">Seleccionar</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -33,7 +41,10 @@
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr>
+                <tr *ngFor="let i of datosTD.data.telefono">
+                    <td> {{ i.codigoTelefono }} </td>
+                    <td> {{ i.numeroTelefono }} </td>
+                    <td> {{ i.operadoraTelefono }} </td>
                 </tr>
             </tbody>
         </table>
@@ -53,7 +64,12 @@
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr>
+                <tr *ngFor="let i of datosTD.data.direccion">
+                    <td> {{ i.codigoDireccion }} </td>
+                    <td> {{ i.callePrincipal }} </td>
+                    <td> {{ i.calleSecundaria }} </td>
+                    <td> {{ i.sectorDireccion }} </td>
+                    <td> {{ i.numeroCasa }} </td>
                 </tr>
             </tbody>
         </table>
@@ -62,8 +78,8 @@
     <section id="botonesCRUD">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button routerLink="/persona" type="button" class="btn btn-primary">Nuevo</button>
-            <button type="button" class="btn btn-primary">Actualizar</button>
-            <button type="button" class="btn btn-primary">Eliminar</button>
+            <button id="btnEditar" type="button" class="btn btn-primary" (click)="editar()" disabled>Editar</button>
+            <button id="btnEliminar" type="button" class="btn btn-primary" (click)="eliminar()" disabled>Eliminar</button>
         </div>
     </section>
 </section>
