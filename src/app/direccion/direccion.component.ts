@@ -34,7 +34,9 @@ export class DireccionComponent {
   validar(){
     if((this.verificarCodigo() == true) && (this.verificarCodigoDueno() == true) && (this.verificarCalle1() == true) && (this.verificarCalle2() == true) && (this.verificarSector() == true) && (this.verificarNumeroCasa() == true)){
       console.log(this.personaService.personaDto);
-      this.myApiService.enviarDatos(this.personaService.personaDto);
+      this.myApiService.insertarPersona(this.personaService.personaDto).subscribe(
+        respuesta =>{ console.log(respuesta);
+        });
       this.router.navigate(['/tablas']);
     }
   }
@@ -52,7 +54,7 @@ export class DireccionComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoDireccion,'es un codigo valido');
-      this.personaService.personaDto.Direccion.CodigoDireccion = this.codigoDireccion
+      this.personaService.personaDto.Direccion.CodigoDireccion = `${this.codigoDireccion}`;
       return true;
     }
   }
@@ -70,7 +72,7 @@ export class DireccionComponent {
       codigoP?.classList.add('form-control', 'is-valid');
       codigoP?.setAttribute('placeholder','');
       console.log(this.codigoDueno,'es un codigo valido');
-      this.personaService.personaDto.Direccion.CodigoPersona = this.codigoDueno;
+      this.personaService.personaDto.Direccion.CodigoPersona = `${this.codigoDueno}`;
       return true;
     }
   }
@@ -88,7 +90,7 @@ export class DireccionComponent {
       calle1?.classList.add('form-control', 'is-valid');
       calle1?.setAttribute('placeholder','');
       console.log(this.callePrincipal);
-      this.personaService.personaDto.Direccion.CallePrincipal = this.callePrincipal;
+      this.personaService.personaDto.Direccion.CallePrincipal = `${this.callePrincipal}`;
       return true;
     }
   }
@@ -106,7 +108,7 @@ export class DireccionComponent {
       calle2?.classList.add('form-control', 'is-valid');
       calle2?.setAttribute('placeholder','');
       console.log(this.calleSecundaria);
-      this.personaService.personaDto.Direccion.CalleSecundaria= this.calleSecundaria;
+      this.personaService.personaDto.Direccion.CalleSecundaria= `${this.calleSecundaria}`;
       return true;
     }
   }
@@ -124,7 +126,7 @@ export class DireccionComponent {
       sector?.classList.add('form-control', 'is-valid');
       sector?.setAttribute('placeholder','');
       console.log(this.sectorDierccion);
-      this.personaService.personaDto.Direccion.SectorDireccion = this.sectorDierccion;
+      this.personaService.personaDto.Direccion.SectorDireccion = `${this.sectorDierccion}`;
       return true;
     }
   }
@@ -142,7 +144,7 @@ export class DireccionComponent {
       numero?.classList.add('form-control', 'is-valid');
       numero?.setAttribute('placeholder','');
       console.log(this.numeroCasa);
-      this.personaService.personaDto.Direccion.NumeroCasa = this.numeroCasa;
+      this.personaService.personaDto.Direccion.NumeroCasa = `${this.numeroCasa}`;
       return true;
     }
   }

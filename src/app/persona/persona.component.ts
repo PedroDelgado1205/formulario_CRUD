@@ -48,7 +48,7 @@ export class PersonaComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoPersona,' es un codigo valido');
-      this.personaService.personaDto.CodigoPersona = this.codigoPersona;
+      this.personaService.personaDto.CodigoPersona = `${this.codigoPersona}`;
       return true;
     }
   }
@@ -93,7 +93,7 @@ export class PersonaComponent {
           cedula?.classList.add('form-control', 'is-valid');
           cedula?.setAttribute('placeholder', '');
           console.log('La cedula: ', this.cedulaPersona, ' es verdadera');
-          this.personaService.personaDto.CedulaPersona = this.cedulaPersona;
+          this.personaService.personaDto.CedulaPersona = `${this.cedulaPersona}`;
           return true;
         }else{
           cedula?.classList.remove('form-control', 'is-valid');
@@ -126,7 +126,7 @@ export class PersonaComponent {
         nombres?.classList.add('form-control', 'is-valid');
         nombres?.setAttribute('placeholder', '');     
         console.log(this.nombresPersona);
-        this.personaService.personaDto.NombresPersona = this.nombresPersona;
+        this.personaService.personaDto.NombresPersona = `${this.nombresPersona}`;
         return true;
       }
     }
@@ -149,7 +149,7 @@ export class PersonaComponent {
         apellidos?.classList.remove('form-control', 'is-invalid');
         apellidos?.classList.add('form-control', 'is-valid');
         console.log(this.apellidosPersona);
-        this.personaService.personaDto.ApellidosPersona = this.apellidosPersona;
+        this.personaService.personaDto.ApellidosPersona = `${this.apellidosPersona}`;
         return true;
       }
     }
@@ -188,7 +188,7 @@ export class PersonaComponent {
         nacionalidad?.classList.remove('form-control', 'is-invalid');
         nacionalidad?.classList.add('form-control', 'is-valid');
         console.log(this.nacionalidadPersona);
-        this.personaService.personaDto.NacionalidadPersona = this.nacionalidadPersona;
+        this.personaService.personaDto.NacionalidadPersona = `${this.nacionalidadPersona}`;
         return true;
       }
     }

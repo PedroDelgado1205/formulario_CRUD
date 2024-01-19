@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody table-group-divider class="personasDatos">
-                <tr *ngFor="let i of datosP.data">
+                <tr *ngFor="let i of datosPs">
                     <td> {{ i.codigoPersona }} </td>
                     <td> {{ i.cedulaPersona }} </td>
                     <td> {{ i.nombresPersona }} </td>
@@ -41,7 +41,7 @@
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr *ngFor="let i of datosTD.data.telefono">
+                <tr *ngFor="let i of datosT">
                     <td> {{ i.codigoTelefono }} </td>
                     <td> {{ i.numeroTelefono }} </td>
                     <td> {{ i.operadoraTelefono }} </td>
@@ -64,7 +64,7 @@
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr *ngFor="let i of datosTD.data.direccion">
+                <tr *ngFor="let i of datosD">
                     <td> {{ i.codigoDireccion }} </td>
                     <td> {{ i.callePrincipal }} </td>
                     <td> {{ i.calleSecundaria }} </td>

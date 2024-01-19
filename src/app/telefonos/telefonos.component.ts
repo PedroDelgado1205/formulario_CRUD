@@ -47,7 +47,7 @@ export class TelefonosComponent implements OnInit {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codiogoTelefono, 'es un codigo valido');
-      this.personaService.personaDto.Telefono.CodigoTelefono = this.codiogoTelefono;
+      this.personaService.personaDto.Telefono.CodigoTelefono = `${this.codiogoTelefono}`;
       return true;
     }
   }
@@ -65,7 +65,7 @@ export class TelefonosComponent implements OnInit {
       codigoP?.classList.add('form-control', 'is-valid');
       codigoP?.setAttribute('placeholder','');
       console.log(this.codiogoDueno, 'es un codigo valido');
-      this.personaService.personaDto.Telefono.CodigoPersona = this.codiogoDueno;
+      this.personaService.personaDto.Telefono.CodigoPersona = `${this.codiogoDueno}`;
       return true;
     }
   }
@@ -90,7 +90,7 @@ export class TelefonosComponent implements OnInit {
         numero?.classList.add('form-control', 'is-valid');
         numero?.setAttribute('placeholder','');
         console.log(this.numeroTelefono);
-        this.personaService.personaDto.Telefono.NumeroTelefono = this.numeroTelefono;
+        this.personaService.personaDto.Telefono.NumeroTelefono = `${this.numeroTelefono}`;
         return true;
       }
     }
@@ -116,7 +116,7 @@ export class TelefonosComponent implements OnInit {
       operadora?.classList.add('form-control', 'is-valid');
       operadora?.setAttribute('placeholder','');
         console.log(this.operadoraTelefono,'es una operadora valida');
-        this.personaService.personaDto.Telefono.OperadoraTelefono = this.operadoraTelefono;
+        this.personaService.personaDto.Telefono.OperadoraTelefono = `${this.operadoraTelefono}`;
         return true;
       }
     }

@@ -14,9 +14,10 @@ export class TablasComponent implements OnInit{
   apellidos!: string;
   edad!: string;
   nacionalidad!: string;
+  datosPs: any;
   datosP: any;
-  datosTD: any;
-  
+  datosT: any;
+  datosD: any;
 
 
   constructor(private myApiService: MyApiService) {}
@@ -24,7 +25,7 @@ export class TablasComponent implements OnInit{
   ngOnInit(){
     this.myApiService.getDatos().subscribe((datos) => {
       console.log('Personas:', datos);
-      this.datosP = datos;
+      this.datosPs = datos.data;
     });
   }
 
@@ -32,7 +33,9 @@ export class TablasComponent implements OnInit{
     this.myApiService.getDatosPersona(condigo).subscribe((datosE)=>{
       console.log('Telefono:', datosE.data.telefono);
       console.log('Direccion:', datosE.data.direccion);
-      this.datosTD=datosE;
+      this.datosT=datosE.data.telefono;
+      this.datosD=datosE.data.direccion;
+      this.datosP=datosE.data;
     });
     const btnEditar = document.getElementById("btnEditar");
     const btnEliminar = document.getElementById("btnEliminar");
