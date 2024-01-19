@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PersonaDtoService } from '../persona-dto.service';
+
 @Component({
   selector: 'app-persona',
   templateUrl: './persona.component.html',
   styleUrls: ['./persona.component.css']
 })
-
 export class PersonaComponent {
-  static persona: Persona;
 
-  constructor(private router: Router){}
-
+  constructor(private router: Router, public personaService: PersonaDtoService){}
 
   codigoPersona!: string;
   cedulaPersona!: string;
@@ -19,14 +18,22 @@ export class PersonaComponent {
   edadPersona!: number;
   nacionalidadPersona!: string;
 
-  persona: Persona = new Persona;
-
   validar(){
-    if((this.verificarCodigo()==true) && (this.verificarCedula()==true) && (this.verificarNombres()==true) && (this.verificarApellidos()==true) && (this.verificarEdad()==true) && (this.verificarNacionalidad()==true)){
-      console.log(this.persona);
-      this.router.navigate([`/telefonos/${this.persona}`]);
+    if (
+      this.verificarCodigo() && 
+      this.verificarCedula() && 
+      this.verificarNombres() && 
+      this.verificarApellidos() && 
+      this.verificarEdad() && 
+      this.verificarNacionalidad()
+    ) {
+      console.log(this.personaService.personaDto);
+      const objetoSerializado = encodeURIComponent(JSON.stringify(this.personaService.personaDto));
+      this.router.navigate(['/telefonos', objetoSerializado]);
     }
   }
+
+
 
   verificarCodigo():boolean{
     const codigo = document.getElementById('codigoPersona');
@@ -41,7 +48,7 @@ export class PersonaComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoPersona,' es un codigo valido');
-      this.persona.codigoPersona = this.codigoPersona;
+      this.personaService.personaDto.CodigoPersona = this.codigoPersona;
       return true;
     }
   }
@@ -86,7 +93,7 @@ export class PersonaComponent {
           cedula?.classList.add('form-control', 'is-valid');
           cedula?.setAttribute('placeholder', '');
           console.log('La cedula: ', this.cedulaPersona, ' es verdadera');
-          this.persona.cedulaPersona = this.cedulaPersona;
+          this.personaService.personaDto.CedulaPersona = this.cedulaPersona;
           return true;
         }else{
           cedula?.classList.remove('form-control', 'is-valid');
@@ -119,7 +126,7 @@ export class PersonaComponent {
         nombres?.classList.add('form-control', 'is-valid');
         nombres?.setAttribute('placeholder', '');     
         console.log(this.nombresPersona);
-        this.persona.nombresPersona = this.nombresPersona;
+        this.personaService.personaDto.NombresPersona = this.nombresPersona;
         return true;
       }
     }
@@ -142,7 +149,7 @@ export class PersonaComponent {
         apellidos?.classList.remove('form-control', 'is-invalid');
         apellidos?.classList.add('form-control', 'is-valid');
         console.log(this.apellidosPersona);
-        this.persona.apellidosPersona = this.apellidosPersona;
+        this.personaService.personaDto.ApellidosPersona = this.apellidosPersona;
         return true;
       }
     }
@@ -159,7 +166,7 @@ export class PersonaComponent {
       edad?.classList.remove('form-control', 'is-invalid');
       edad?.classList.add('form-control', 'is-valid');
       console.log(this.edadPersona);
-      this.persona.edadPersona = this.edadPersona;
+      this.personaService.personaDto.EdadPersona = this.edadPersona;
       return true;
     }
   }
@@ -181,39 +188,12 @@ export class PersonaComponent {
         nacionalidad?.classList.remove('form-control', 'is-invalid');
         nacionalidad?.classList.add('form-control', 'is-valid');
         console.log(this.nacionalidadPersona);
-        this.persona.nacionalidadPersona = this.nacionalidadPersona;
+        this.personaService.personaDto.NacionalidadPersona = this.nacionalidadPersona;
         return true;
       }
     }
   }
 }
 
-class Direccion {
-  codigoDireccion!: string;
-  codigoPersona!: string;
-  callePrincipal!: string;
-  calleSecundaria!: string;
-  sectorDireccion!: string;
-  numeroCasa!: string;
-}
 
-class Telefono {
-  codigoTelefono!: string;
-  codigoPersona!: string;
-  numeroTelefono!: string;
-  operadoraTelefono!: string;
-}
-
-class Persona {
-  codigoPersona!: string;
-  cedulaPersona!: string;
-  nombresPersona!: string;
-  apellidosPersona!: string;
-  edadPersona!: number;
-  nacionalidadPersona!: string;
-
-  telefono: Telefono = new Telefono;
-
-  direccion: Direccion = new Direccion;
-}
 

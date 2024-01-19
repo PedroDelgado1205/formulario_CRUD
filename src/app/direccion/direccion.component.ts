@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { PersonaComponent } from '../persona/persona.component';
-import { TelefonosComponent } from '../telefonos/telefonos.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PersonaDtoService } from '../persona-dto.service';
+import { MyApiService } from '../my-api.service';
 
 @Component({
   selector: 'app-direccion',
@@ -12,8 +12,6 @@ import { TelefonosComponent } from '../telefonos/telefonos.component';
 
 export class DireccionComponent {
 
-  constructor(private router: Router){}
-
   codigoDireccion!: string;
   codigoDueno!: string;
   callePrincipal!: string;
@@ -21,10 +19,22 @@ export class DireccionComponent {
   sectorDierccion!: string;
   numeroCasa!: string;
 
-  persona: TelefonosComponent["persona"] = PersonaComponent.persona;
+  constructor(private route: ActivatedRoute, private router: Router, private personaService: PersonaDtoService, private myApiService: MyApiService) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      const objetoSerializado = params['pe'];
+      if (objetoSerializado) {
+        const objetoDeserializado = JSON.parse(decodeURIComponent(objetoSerializado));
+        this.personaService.setPersonaDto(objetoDeserializado);
+      }
+    });
+  }
+  
   validar(){
     if((this.verificarCodigo() == true) && (this.verificarCodigoDueno() == true) && (this.verificarCalle1() == true) && (this.verificarCalle2() == true) && (this.verificarSector() == true) && (this.verificarNumeroCasa() == true)){
-      console.log(this.persona);
+      console.log(this.personaService.personaDto);
+      this.myApiService.enviarDatos(this.personaService.personaDto);
       this.router.navigate(['/tablas']);
     }
   }
@@ -42,7 +52,7 @@ export class DireccionComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoDireccion,'es un codigo valido');
-      this.persona.direccion.codigoDireccion = this.codigoDireccion
+      this.personaService.personaDto.Direccion.CodigoDireccion = this.codigoDireccion
       return true;
     }
   }
@@ -60,7 +70,7 @@ export class DireccionComponent {
       codigoP?.classList.add('form-control', 'is-valid');
       codigoP?.setAttribute('placeholder','');
       console.log(this.codigoDueno,'es un codigo valido');
-      this.persona.direccion.codigoPersona = this.codigoDueno;
+      this.personaService.personaDto.Direccion.CodigoPersona = this.codigoDueno;
       return true;
     }
   }
@@ -78,7 +88,7 @@ export class DireccionComponent {
       calle1?.classList.add('form-control', 'is-valid');
       calle1?.setAttribute('placeholder','');
       console.log(this.callePrincipal);
-      this.persona.direccion.callePrincipal = this.callePrincipal;
+      this.personaService.personaDto.Direccion.CallePrincipal = this.callePrincipal;
       return true;
     }
   }
@@ -96,7 +106,7 @@ export class DireccionComponent {
       calle2?.classList.add('form-control', 'is-valid');
       calle2?.setAttribute('placeholder','');
       console.log(this.calleSecundaria);
-      this.persona.direccion.calleSecundaria= this.calleSecundaria;
+      this.personaService.personaDto.Direccion.CalleSecundaria= this.calleSecundaria;
       return true;
     }
   }
@@ -114,7 +124,7 @@ export class DireccionComponent {
       sector?.classList.add('form-control', 'is-valid');
       sector?.setAttribute('placeholder','');
       console.log(this.sectorDierccion);
-      this.persona.direccion.sectorDireccion = this.sectorDierccion;
+      this.personaService.personaDto.Direccion.SectorDireccion = this.sectorDierccion;
       return true;
     }
   }
@@ -132,19 +142,10 @@ export class DireccionComponent {
       numero?.classList.add('form-control', 'is-valid');
       numero?.setAttribute('placeholder','');
       console.log(this.numeroCasa);
-      this.persona.direccion.numeroCasa = this.numeroCasa;
+      this.personaService.personaDto.Direccion.NumeroCasa = this.numeroCasa;
       return true;
     }
   }
 }
 
-
-class Direccion {
-  codigo!: string;
-  codigoPersona!: string;
-  callePrincipal!: string;
-  calleSecundaria!: string;
-  sector!: string;
-  numero!: string;
-}
 

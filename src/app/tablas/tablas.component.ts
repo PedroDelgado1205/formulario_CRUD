@@ -21,9 +21,7 @@ export class TablasComponent implements OnInit{
 
   constructor(private myApiService: MyApiService) {}
 
-  ngOnInit(): void {
-    const sleccionar = document.getElementById('sleccionar');
-    // Ejemplo de cómo utilizar el servicio en tu componente
+  ngOnInit(){
     this.myApiService.getDatos().subscribe((datos) => {
       console.log('Personas:', datos);
       this.datosP = datos;

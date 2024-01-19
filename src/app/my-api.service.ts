@@ -22,6 +22,6 @@ export class MyApiService {
 
   // Ejemplo de una solicitud POST
   enviarDatos(datos: any): Observable<any> {
-    return this.http.post<any>(``, datos);
+    return this.http.post<any>(`https://localhost:5001/api/Persona/insertarPersona`,datos);
   }
 }
