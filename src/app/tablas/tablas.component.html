@@ -1,7 +1,9 @@
 <app-inicio></app-inicio>
 <section id="datos">
     <section id="datosPersona">
-        <h4>Personas</h4>
+        <div class="titulo">
+            <h1>Personas</h1>
+        </div>
         <hr>
         <table class="table table-bordered table-sm" ngForm="personaAPI">
             <thead>
@@ -13,6 +15,8 @@
                     <th scope="col">Edad</th>
                     <th scope="col">Nacionalidad</th>
                     <th scope="col">Seleccionar</th>
+                    <th scope="col">Eliminar</th>
+                    <th scope="col">Editar</th>
                 </tr>
             </thead>
             <tbody table-group-divider class="personasDatos">
@@ -23,15 +27,18 @@
                     <td> {{ i.apellidosPersona }} </td>
                     <td> {{ i.edadPersona }} </td>
                     <td> {{ i.nacionalidadPersona }} </td>
-                    <td> <button (click)="TelefonDireccion(i.codigoPersona)">Seleccionar</button> </td>
+                    <td> <button class="btn btn-primary" (click)="TelefonDireccion(i.codigoPersona)">Seleccionar</button> </td>
+                    <td> <button class="btn btn-danger" (click)="Eliminar(i.codigoPersona)">Eliminar</button> </td>
+                    <td> <button class="btn btn-danger" (click)="Editar()">Editar</button> </td>
                 </tr>
             </tbody>
         </table>
     </section>
     
     <section id="datosPersonaTelefono">
-        <h4>Telefonos</h4>
-        <hr>
+        <div class="titulo">
+            <h1>Telefono</h1>
+        </div>
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
@@ -51,7 +58,9 @@
     </section>
     
     <section id="datosPersonaDireccion">
-        <h4>Direccion</h4>
+        <div class="titulo">
+            <h1>Direccion</h1>
+        </div>
         <hr>
         <table class="table table-bordered table-sm">
             <thead>
@@ -73,13 +82,5 @@
                 </tr>
             </tbody>
         </table>
-    </section>
-    
-    <section id="botonesCRUD">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button routerLink="/persona" type="button" class="btn btn-primary">Nuevo</button>
-            <button id="btnEditar" type="button" class="btn btn-primary" (click)="editar()" disabled>Editar</button>
-            <button id="btnEliminar" type="button" class="btn btn-primary" (click)="eliminar()" disabled>Eliminar</button>
-        </div>
     </section>
 </section>

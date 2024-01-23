@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonaDtoService } from '../persona-dto.service';
 
 @Component({
@@ -7,9 +7,9 @@ import { PersonaDtoService } from '../persona-dto.service';
   templateUrl: './persona.component.html',
   styleUrls: ['./persona.component.css']
 })
-export class PersonaComponent {
+export class PersonaComponent implements OnInit{
 
-  constructor(private router: Router, public personaService: PersonaDtoService){}
+  constructor(private route: ActivatedRoute, private router: Router, public personaService: PersonaDtoService){}
 
   codigoPersona!: string;
   cedulaPersona!: string;
@@ -17,6 +17,22 @@ export class PersonaComponent {
   apellidosPersona!: string;
   edadPersona!: number;
   nacionalidadPersona!: string;
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      const objeto = params['pe'];
+      if (objeto) {
+        const objetoDeserializado = JSON.parse(decodeURIComponent(objeto));
+        this.personaService.setPersonaDto(objetoDeserializado);
+        this.codigoPersona = this.personaService.personaDto.codigoPersona;
+        this.cedulaPersona = this.personaService.personaDto.cedulaPersona;
+        this.nombresPersona = this.personaService.personaDto.nombresPersona;
+        this.apellidosPersona = this.personaService.personaDto.apellidosPersona;
+        this.edadPersona = this.personaService.personaDto.edadPersona;
+        this.nacionalidadPersona = this.personaService.personaDto.nacionalidadPersona;
+      }
+    });
+  }
 
   validar(){
     if (
@@ -27,7 +43,7 @@ export class PersonaComponent {
       this.verificarEdad() && 
       this.verificarNacionalidad()
     ) {
-      console.log(this.personaService.personaDto);
+      //console.log(this.personaService.personaDto);
       const objetoSerializado = encodeURIComponent(JSON.stringify(this.personaService.personaDto));
       this.router.navigate(['/telefonos', objetoSerializado]);
     }
@@ -48,7 +64,7 @@ export class PersonaComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoPersona,' es un codigo valido');
-      this.personaService.personaDto.CodigoPersona = `${this.codigoPersona}`;
+      this.personaService.personaDto.codigoPersona = `${this.codigoPersona}`;
       return true;
     }
   }
@@ -93,7 +109,7 @@ export class PersonaComponent {
           cedula?.classList.add('form-control', 'is-valid');
           cedula?.setAttribute('placeholder', '');
           console.log('La cedula: ', this.cedulaPersona, ' es verdadera');
-          this.personaService.personaDto.CedulaPersona = `${this.cedulaPersona}`;
+          this.personaService.personaDto.cedulaPersona = `${this.cedulaPersona}`;
           return true;
         }else{
           cedula?.classList.remove('form-control', 'is-valid');
@@ -126,7 +142,7 @@ export class PersonaComponent {
         nombres?.classList.add('form-control', 'is-valid');
         nombres?.setAttribute('placeholder', '');     
         console.log(this.nombresPersona);
-        this.personaService.personaDto.NombresPersona = `${this.nombresPersona}`;
+        this.personaService.personaDto.nombresPersona = `${this.nombresPersona}`;
         return true;
       }
     }
@@ -149,7 +165,7 @@ export class PersonaComponent {
         apellidos?.classList.remove('form-control', 'is-invalid');
         apellidos?.classList.add('form-control', 'is-valid');
         console.log(this.apellidosPersona);
-        this.personaService.personaDto.ApellidosPersona = `${this.apellidosPersona}`;
+        this.personaService.personaDto.apellidosPersona = `${this.apellidosPersona}`;
         return true;
       }
     }
@@ -166,7 +182,7 @@ export class PersonaComponent {
       edad?.classList.remove('form-control', 'is-invalid');
       edad?.classList.add('form-control', 'is-valid');
       console.log(this.edadPersona);
-      this.personaService.personaDto.EdadPersona = this.edadPersona;
+      this.personaService.personaDto.edadPersona = this.edadPersona;
       return true;
     }
   }
@@ -188,7 +204,7 @@ export class PersonaComponent {
         nacionalidad?.classList.remove('form-control', 'is-invalid');
         nacionalidad?.classList.add('form-control', 'is-valid');
         console.log(this.nacionalidadPersona);
-        this.personaService.personaDto.NacionalidadPersona = `${this.nacionalidadPersona}`;
+        this.personaService.personaDto.nacionalidadPersona = `${this.nacionalidadPersona}`;
         return true;
       }
     }

@@ -9,6 +9,7 @@ import { TelefonosComponent } from './telefonos/telefonos.component';
 import { DireccionComponent } from './direccion/direccion.component';
 import { TablasComponent } from './tablas/tablas.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     TelefonosComponent,
     DireccionComponent,
     TablasComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

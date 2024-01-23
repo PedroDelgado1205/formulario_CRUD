@@ -1,4 +1,7 @@
 <app-inicio></app-inicio>
+<div class="titulo">
+    <h1>Datos direccion</h1>
+</div>
 <section id="direccion">
     <div id="CodigoDireccion">
         <div class="input-group input-group-sm mb-3">
@@ -36,7 +39,26 @@
             <input [(ngModel)]="numeroCasa" id="numeroCasa" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
     </div>
-    <div id="Guardar">
-        <button type="button" class="btn btn-primary" (click)="validar()">Guardar</button>
+    <hr>
+    <div>
+        <button id="insert" type="button" class="btn btn-primary" (click)="validarInsercion()">Guardar Nuevo</button>
+        <button id="update" type="button" class="btn btn-primary" (click)="validarEdicion()">Guardar Edicion</button>
     </div>
+    <dialog id="modal">
+        <header>
+            <h5>Alerta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modal.close();"></button>
+        </header>
+        <hr>
+        <section>
+            <div id="mensaje">
+                <h4>Guardar Datos</h4>
+            </div>
+            <div id="btnsGuardar">
+                <button type="button" class="btn btn-primary" (click)="validarInsercion()">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="validarEdicion()">Guardar</button>
+                <button type="button" class="btn btn-danger" onclick="window.modal.close();">Cancelar</button>
+            </div>
+        </section>
+    </dialog>
 </section>

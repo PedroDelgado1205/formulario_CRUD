@@ -11,7 +11,7 @@ import { TablasComponent } from './tablas/tablas.component';
 const routes: Routes = [
   { path: '', redirectTo: '/tablas', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent },
-  { path: 'persona', component: PersonaComponent },
+  { path: 'persona/:pe', component: PersonaComponent },
   { path: 'telefonos/:pe', component: TelefonosComponent },
   { path: 'direccion/:pe', component: DireccionComponent },
   { path: 'tablas', component: TablasComponent },

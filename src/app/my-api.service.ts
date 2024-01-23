@@ -14,7 +14,7 @@ export class MyApiService {
   constructor(private http: HttpClient) {}
 
   apiUrl = 'https://localhost:5001/api/Persona'
-  // Ejemplo de una solicitud GET
+
   getDatos(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/personas`);
   }
@@ -27,10 +27,23 @@ export class MyApiService {
     return this.http.post<any>(`${this.apiUrl}/insertarPersona`,persona)
     .pipe(
       catchError(error => {
-        // Aquí puedes manejar el error de la manera que desees
         console.log('Error en la solicitud:', error);
         return throwError(error);
       })
     );
+  }
+
+  editarPersona(persona: any): Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}/editarPersona`,persona)
+    .pipe(
+      catchError(error => {
+        console.log('Error en la solicitud:', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+  eliminarPersona(codigo: string){
+    return this.http.get<any>(`${this.apiUrl}/eliminarPersona/${codigo}`)
   }
 }

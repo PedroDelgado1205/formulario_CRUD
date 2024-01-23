@@ -8,7 +8,54 @@
     padding-left: 45%;
 }
 
-.btn{
+.btn.btn-primary{
     background-color: #426AA2;
     border: #264570;
+}
+
+.btn.btn-danger{
+    background-color: #FB9224;
+    border: #af691d;
+}
+
+.btn.btn-primary:hover {
+    background-color: #264570;
+    border: #426AA2;
+}
+
+.btn.btn-danger:hover {
+    background-color: #af691d;
+    border: #FB9224;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #FB9224 double;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#mensaje{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+#btnsGuardar{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#modal{
+    border: 1px gray;
+    border-radius: 10px;
+    width: 30%;
 }

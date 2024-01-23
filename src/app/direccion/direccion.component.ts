@@ -27,17 +27,74 @@ export class DireccionComponent {
       if (objetoSerializado) {
         const objetoDeserializado = JSON.parse(decodeURIComponent(objetoSerializado));
         this.personaService.setPersonaDto(objetoDeserializado);
+        this.codigoDireccion = this.personaService.personaDto.direccion.codigoDireccion
+        this.codigoDueno = this.personaService.personaDto.direccion.codigoPersona
+        this.callePrincipal = this.personaService.personaDto.direccion.callePrincipal
+        this.calleSecundaria = this.personaService.personaDto.direccion.calleSecundaria
+        this.sectorDierccion = this.personaService.personaDto.direccion.sectorDireccion
+        this.numeroCasa = this.personaService.personaDto.direccion.numeroCasa
       }
-    });
+    }); 
+    this.ocultarBtn();
   }
   
-  validar(){
-    if((this.verificarCodigo() == true) && (this.verificarCodigoDueno() == true) && (this.verificarCalle1() == true) && (this.verificarCalle2() == true) && (this.verificarSector() == true) && (this.verificarNumeroCasa() == true)){
+  ocultarBtn(){
+    const update = document.getElementById('update');
+    const insert = document.getElementById('insert');
+    if(this.personaService.edit == true){
+      console.log('Editando...');
+      if(insert){
+        console.log('ocultando el boton de insert...');
+        insert.hidden = true;
+      }
+    }else if(this.personaService.edit == false){
+      console.log('Agregando...');
+      if(update){
+        console.log('ocultando el boton de update...');
+        update.hidden = true;
+      }
+    }else{
+      alert("Error en la asignación de valor a edit");
+    }
+  }
+
+  validarInsercion(){
+    if(
+      this.verificarCodigo() && 
+      this.verificarCodigoDueno() && 
+      this.verificarCalle1() && 
+      this.verificarCalle2() && 
+      this.verificarSector() && 
+      this.verificarNumeroCasa()
+    ){
       console.log(this.personaService.personaDto);
       this.myApiService.insertarPersona(this.personaService.personaDto).subscribe(
-        respuesta =>{ console.log(respuesta);
+        respuesta =>{ 
+          console.log(respuesta);
         });
       this.router.navigate(['/tablas']);
+    }else{
+      console.log('no se puede realizar la accion')
+    }
+  }
+
+  validarEdicion(){
+    if(
+      this.verificarCodigo() && 
+      this.verificarCodigoDueno() && 
+      this.verificarCalle1() && 
+      this.verificarCalle2() && 
+      this.verificarSector() && 
+      this.verificarNumeroCasa()
+    ){
+      console.log(this.personaService.personaDto);
+      this.myApiService.editarPersona(this.personaService.personaDto).subscribe(
+        respuesta =>{ 
+          console.log(respuesta);
+        });
+      this.router.navigate(['/tablas']);
+    }else{
+      console.log('no se puede realizar la accion')
     }
   }
 
@@ -54,7 +111,7 @@ export class DireccionComponent {
       codigo?.classList.add('form-control', 'is-valid');
       codigo?.setAttribute('placeholder','');
       console.log(this.codigoDireccion,'es un codigo valido');
-      this.personaService.personaDto.Direccion.CodigoDireccion = `${this.codigoDireccion}`;
+      this.personaService.personaDto.direccion.codigoDireccion = `${this.codigoDireccion}`;
       return true;
     }
   }
@@ -72,7 +129,7 @@ export class DireccionComponent {
       codigoP?.classList.add('form-control', 'is-valid');
       codigoP?.setAttribute('placeholder','');
       console.log(this.codigoDueno,'es un codigo valido');
-      this.personaService.personaDto.Direccion.CodigoPersona = `${this.codigoDueno}`;
+      this.personaService.personaDto.direccion.codigoPersona = `${this.codigoDueno}`;
       return true;
     }
   }
@@ -90,7 +147,7 @@ export class DireccionComponent {
       calle1?.classList.add('form-control', 'is-valid');
       calle1?.setAttribute('placeholder','');
       console.log(this.callePrincipal);
-      this.personaService.personaDto.Direccion.CallePrincipal = `${this.callePrincipal}`;
+      this.personaService.personaDto.direccion.callePrincipal = `${this.callePrincipal}`;
       return true;
     }
   }
@@ -108,7 +165,7 @@ export class DireccionComponent {
       calle2?.classList.add('form-control', 'is-valid');
       calle2?.setAttribute('placeholder','');
       console.log(this.calleSecundaria);
-      this.personaService.personaDto.Direccion.CalleSecundaria= `${this.calleSecundaria}`;
+      this.personaService.personaDto.direccion.calleSecundaria= `${this.calleSecundaria}`;
       return true;
     }
   }
@@ -126,7 +183,7 @@ export class DireccionComponent {
       sector?.classList.add('form-control', 'is-valid');
       sector?.setAttribute('placeholder','');
       console.log(this.sectorDierccion);
-      this.personaService.personaDto.Direccion.SectorDireccion = `${this.sectorDierccion}`;
+      this.personaService.personaDto.direccion.sectorDireccion = `${this.sectorDierccion}`;
       return true;
     }
   }
@@ -144,7 +201,7 @@ export class DireccionComponent {
       numero?.classList.add('form-control', 'is-valid');
       numero?.setAttribute('placeholder','');
       console.log(this.numeroCasa);
-      this.personaService.personaDto.Direccion.NumeroCasa = `${this.numeroCasa}`;
+      this.personaService.personaDto.direccion.numeroCasa = `${this.numeroCasa}`;
       return true;
     }
   }

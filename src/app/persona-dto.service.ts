@@ -6,38 +6,63 @@ import { Injectable } from '@angular/core';
 export class PersonaDtoService {
 
   personaDto: PersonaRequest;
+  edit!: Boolean;
 
   constructor() { 
     this.personaDto = new PersonaRequest;
   }
 
+  setEdiIns(trFa : boolean){
+    this.edit = trFa
+  }
+
   setPersonaDto(objetoDeserializado: any): void {
-    this.personaDto = objetoDeserializado;
+    console.log(objetoDeserializado);
+
+    this.personaDto.codigoPersona = objetoDeserializado.codigoPersona;
+    this.personaDto.cedulaPersona = objetoDeserializado.cedulaPersona;
+    this.personaDto.nombresPersona = objetoDeserializado.nombresPersona;
+    this.personaDto.apellidosPersona = objetoDeserializado.apellidosPersona;
+    this.personaDto.edadPersona = objetoDeserializado.edadPersona;
+    this.personaDto.nacionalidadPersona = objetoDeserializado.nacionalidadPersona;
+
+    this.personaDto.telefono.codigoTelefono = objetoDeserializado.telefono.codigoTelefono;
+    this.personaDto.telefono.codigoPersona = objetoDeserializado.telefono.codigoPersona;
+    this.personaDto.telefono.numeroTelefono = objetoDeserializado.telefono.numeroTelefono;
+    this.personaDto.telefono.operadoraTelefono = objetoDeserializado.telefono.operadoraTelefono;
+
+    this.personaDto.direccion.codigoDireccion = objetoDeserializado.direccion.codigoDireccion;
+    this.personaDto.direccion.codigoPersona = objetoDeserializado.direccion.codigoPersona;
+    this.personaDto.direccion.callePrincipal = objetoDeserializado.direccion.callePrincipal;
+    this.personaDto.direccion.calleSecundaria = objetoDeserializado.direccion.calleSecundaria;
+    this.personaDto.direccion.sectorDireccion = objetoDeserializado.direccion.sectorDireccion;
+    this.personaDto.direccion.numeroCasa = objetoDeserializado.direccion.numeroCasa;
+
   }
 }
 class DireccionRequest {
-  CodigoDireccion!: string;
-  CodigoPersona!: string;
-  CallePrincipal!: string;
-  CalleSecundaria!: string;
-  SectorDireccion!: string;
-  NumeroCasa!: string;
+  codigoDireccion!: string;
+  codigoPersona!: string;
+  callePrincipal!: string;
+  calleSecundaria!: string;
+  sectorDireccion!: string;
+  numeroCasa!: string;
 }
 
 class TelefonoRequest {
-  CodigoTelefono!: string;
-  CodigoPersona!: string;
-  NumeroTelefono!: string;
-  OperadoraTelefono!: string;
+  codigoTelefono!: string;
+  codigoPersona!: string;
+  numeroTelefono!: string;
+  operadoraTelefono!: string;
 }
 
 class PersonaRequest {
-  CodigoPersona!: string;
-  CedulaPersona!: string;
-  NombresPersona!: string;
-  ApellidosPersona!: string;
-  EdadPersona!: number;
-  NacionalidadPersona!: string;
-  Direccion: DireccionRequest = new DireccionRequest;
-  Telefono: TelefonoRequest = new TelefonoRequest;
+  codigoPersona!: string;
+  cedulaPersona!: string;
+  nombresPersona!: string;
+  apellidosPersona!: string;
+  edadPersona!: number;
+  nacionalidadPersona!: string;
+  direccion: DireccionRequest = new DireccionRequest;
+  telefono: TelefonoRequest = new TelefonoRequest;
 }
