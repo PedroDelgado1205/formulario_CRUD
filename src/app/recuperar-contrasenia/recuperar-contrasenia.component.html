@@ -1,0 +1,41 @@
+<main>
+    <section id="logo">
+        <img src="./assets/images/logo.png" alt="Logo"/>
+    </section>
+    <section id="formulario">
+        <h3>ingrese su codgio de usuario</h3>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">codigo</span>
+            <input [(ngModel)]="codigo" id="codigo" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <h3>ingrese su usuario</h3>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">usuario</span>
+            <input [(ngModel)]="usuario" id="usuario" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <h3>ingrese su correo</h3>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">usuario</span>
+            <input [(ngModel)]="correo" id="correo" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+    </section>
+    <section id="botones">
+        <button id="btnlogin" type="button" class="btn btn-primary" (click)="recuperar()" onclick="window.modalEliminacion.showModal();">Recuperar</button>
+    </section>
+
+    <dialog id="modalEliminacion">
+        <header>
+            <h5>Alerta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modalEliminacion.close();"></button>
+        </header>
+        <hr>
+        <section>
+            <div id="mensaje">
+                <p>{{ clave }}</p>
+            </div>
+            <div id="btnsGuardar">
+                <button type="button" class="btn btn-primary" routerLink="/login">Aceptar</button>
+            </div>
+        </section>
+    </dialog>
+</main>

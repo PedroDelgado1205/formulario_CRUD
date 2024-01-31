@@ -10,6 +10,10 @@ import { DireccionComponent } from './direccion/direccion.component';
 import { TablasComponent } from './tablas/tablas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
+import { RecuperarContraseniaComponent } from './recuperar-contrasenia/recuperar-contrasenia.component';
+import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { FooterComponent } from './footer/footer.component';
     DireccionComponent,
     TablasComponent,
     FooterComponent,
+    LoginComponent,
+    RegistroComponent,
+    RecuperarContraseniaComponent,
+    EditarPerfilComponent,
   ],
   imports: [
     BrowserModule,

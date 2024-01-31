@@ -1,0 +1,21 @@
+<main>
+    <section id="logo">
+        <img src="./assets/images/logo.png" alt="Logo"/>
+    </section>
+    <section id="login">
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Ususario</span>
+            <input [(ngModel)]="usuario" id="usuario" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">contraseña</span>
+            <input [(ngModel)]="contrasena" id="contrasena" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <button class="btn btn-danger" id="ver" (click)="verClave()"><i class="fas fa-eye" style="color: #264570;"></i></button>
+        </div>
+        <a routerLink="/recuperar" class="link btn-danger">Olvidaste tu contraseña</a>
+    </section>
+    <section id="botones">
+        <button id="btnlogin" type="button" class="btn btn-primary" (click)="validar()">Iniciar sesion</button>
+        <a (click)="nuevo()" class="link btn-danger">Registrarse</a>
+    </section>
+</main>

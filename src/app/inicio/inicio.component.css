@@ -27,3 +27,9 @@ nav ul li:hover {
 nav ul .active {
     background: #FB9224;
 }
+
+
+img{
+    width: 23px;
+    height: 23px;
+}

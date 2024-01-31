@@ -8,7 +8,8 @@
         <table class="table table-bordered table-sm" ngForm="personaAPI">
             <thead>
                 <tr>
-                    <th scope="col">Codigo</th>
+                    <th scope="col">#</th>
+                    <!-- <th scope="col">Codigo</th> -->
                     <th scope="col">Celdula</th>
                     <th scope="col">Nombres</th>
                     <th scope="col">Apellidos</th>
@@ -19,17 +20,18 @@
                     <th scope="col">Editar</th>
                 </tr>
             </thead>
-            <tbody table-group-divider class="personasDatos">
-                <tr *ngFor="let i of datosPs">
-                    <td> {{ i.codigoPersona }} </td>
+            <tbody table-group-divider class="personasDatos" id="tabPersona">
+                <tr *ngFor="let i of datosPs , let y = index">
+                    <td> {{ y+1 }} </td>
+                    <!-- <td> {{ i.codigoPersona }} </td> -->
                     <td> {{ i.cedulaPersona }} </td>
                     <td> {{ i.nombresPersona }} </td>
                     <td> {{ i.apellidosPersona }} </td>
                     <td> {{ i.edadPersona }} </td>
                     <td> {{ i.nacionalidadPersona }} </td>
-                    <td> <button class="btn btn-primary" (click)="TelefonDireccion(i.codigoPersona)">Seleccionar</button> </td>
-                    <td> <button class="btn btn-danger" (click)="Eliminar(i.codigoPersona)">Eliminar</button> </td>
-                    <td> <button class="btn btn-danger" (click)="Editar()">Editar</button> </td>
+                    <td> <button class="btn btn-primary" (click)="TelefonDireccion(i.codigoPersona, y)">Seleccionar</button> </td>
+                    <td> <button disabled class="btn btn-danger" name="Eliminar" (click)="Codigo(i.codigoPersona)" onclick="window.modalEliminacion.showModal();">Eliminar</button> </td>
+                    <td> <button disabled class="btn btn-danger" name="Editar" (click)="Editar()">Editar</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -39,17 +41,17 @@
         <div class="titulo">
             <h1>Telefono</h1>
         </div>
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered table-sm"> 
             <thead>
                 <tr>
-                    <th scope="col">Codigo</th>
+                    <!-- <th scope="col">Codigo</th> -->
                     <th scope="col">Numero de telefono</th>
                     <th scope="col">Operadora</th>
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr *ngFor="let i of datosT">
-                    <td> {{ i.codigoTelefono }} </td>
+                <tr *ngFor="let i of datosT" id="tabTelefono">
+                    <!-- <td> {{ i.codigoTelefono }} </td> -->
                     <td> {{ i.numeroTelefono }} </td>
                     <td> {{ i.operadoraTelefono }} </td>
                 </tr>
@@ -65,7 +67,7 @@
         <table class="table table-bordered table-sm">
             <thead>
                 <tr>
-                    <th scope="col">Codigo</th>
+                    <!-- <th scope="col">Codigo</th> -->
                     <th scope="col">calle Principal</th>
                     <th scope="col">calle Secundaria</th>
                     <th scope="col">Sector</th>
@@ -73,8 +75,8 @@
                 </tr>
             </thead>
             <tbody table-group-divider>
-                <tr *ngFor="let i of datosD">
-                    <td> {{ i.codigoDireccion }} </td>
+                <tr *ngFor="let i of datosD" id="tabDireccion">
+                    <!-- <td> {{ i.codigoDireccion }} </td> -->
                     <td> {{ i.callePrincipal }} </td>
                     <td> {{ i.calleSecundaria }} </td>
                     <td> {{ i.sectorDireccion }} </td>
@@ -83,4 +85,21 @@
             </tbody>
         </table>
     </section>
+    <dialog id="modalEliminacion">
+        <header>
+            <h5>Alerta</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modalEliminacion.close();"></button>
+        </header>
+        <hr>
+        <section>
+            <div id="mensaje">
+                <h4>¿Está seguro que desea ELIMINAR este registro? Esto no se puede deshacer.</h4>
+            </div>
+            <div id="btnsGuardar">
+                <button type="button" class="btn btn-primary" onclick="window.modalEliminacion.close();" (click)="Eliminar()">Guardar</button>
+                <button type="button" class="btn btn-danger" onclick="window.modalEliminacion.close();">Cancelar</button>
+            </div>
+        </section>
+    </dialog>
 </section>
+

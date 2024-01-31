@@ -6,13 +6,13 @@
     <div id="CodigoDireccion">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Código</span>
-            <input [(ngModel)]="codigoDireccion" id="codigoDireccion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input [(ngModel)]="codigoDireccion" id="codigoDireccion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled="true">
         </div>
     </div>
     <div id="CodigoPersona">
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">Código del dueño</span>
-            <input [(ngModel)]="codigoDueno" id="codigoDueno" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            <input [(ngModel)]="codigoDueno" id="codigoDueno" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled="true">
         </div>
     </div>
     <div id="Calle1">
@@ -41,24 +41,41 @@
     </div>
     <hr>
     <div>
-        <button id="insert" type="button" class="btn btn-primary" (click)="validarInsercion()">Guardar Nuevo</button>
-        <button id="update" type="button" class="btn btn-primary" (click)="validarEdicion()">Guardar Edicion</button>
+        <button id="insert" type="button" class="btn btn-primary" onclick="window.modalInsercion.showModal();">Guardar Nuevo</button>
+        <button id="update" type="button" class="btn btn-primary" onclick="window.modalEdicion.showModal();">Guardar Edicion</button>
     </div>
-    <dialog id="modal">
-        <header>
-            <h5>Alerta</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modal.close();"></button>
-        </header>
-        <hr>
-        <section>
-            <div id="mensaje">
-                <h4>Guardar Datos</h4>
-            </div>
-            <div id="btnsGuardar">
-                <button type="button" class="btn btn-primary" (click)="validarInsercion()">Guardar</button>
-                <button type="button" class="btn btn-primary" (click)="validarEdicion()">Guardar</button>
-                <button type="button" class="btn btn-danger" onclick="window.modal.close();">Cancelar</button>
-            </div>
-        </section>
-    </dialog>
 </section>
+
+<dialog id="modalEdicion">
+    <header>
+        <h5>Alerta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modalEdicion.close();"></button>
+    </header>
+    <hr>
+    <section>
+        <div id="mensaje">
+            <h4>¿Está seguro que desea EDITAR este registro?</h4>
+        </div>
+        <div id="btnsGuardar">
+            <button type="button" class="btn btn-primary" (click)="validarEdicion()">Guardar</button>
+            <button type="button" class="btn btn-danger" routerLink="/tablas">Cancelar</button>
+        </div>
+    </section>
+</dialog>
+
+<dialog id="modalInsercion">
+    <header>
+        <h5>Alerta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modalInsercion.close();"></button>
+    </header>
+    <hr>
+    <section>
+        <div id="mensaje">
+            <h4>¿Está seguro que desea AGREGAR este registro?</h4>
+        </div>
+        <div id="btnsGuardar">
+            <button type="button" class="btn btn-primary" (click)="validarInsercion()">Guardar</button>
+            <button type="button" class="btn btn-danger" routerLink="/tablas">Cancelar</button>
+        </div>
+    </section>
+</dialog>

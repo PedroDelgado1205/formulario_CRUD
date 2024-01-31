@@ -71,10 +71,18 @@ export class DireccionComponent {
       this.myApiService.insertarPersona(this.personaService.personaDto).subscribe(
         respuesta =>{ 
           console.log(respuesta);
-        });
-      this.router.navigate(['/tablas']);
+      });
+      this.route.params.subscribe((params) =>{
+        let id = params['id'];
+        this.personaService.serIdUser(parseInt(id))
+      })
+      this.router.navigate(['/tablas',this.personaService.idUser]);
     }else{
-      console.log('no se puede realizar la accion')
+      this.route.params.subscribe((params) =>{
+        let id = params['id'];
+        this.personaService.serIdUser(parseInt(id))
+      })
+      this.router.navigate(['/tablas',this.personaService.idUser]);
     }
   }
 
@@ -92,9 +100,17 @@ export class DireccionComponent {
         respuesta =>{ 
           console.log(respuesta);
         });
-      this.router.navigate(['/tablas']);
+        this.route.params.subscribe((params) =>{
+          let id = params['id'];
+          this.personaService.serIdUser(parseInt(id))
+        })
+      this.router.navigate(['/tablas',this.personaService.idUser]);
     }else{
-      console.log('no se puede realizar la accion')
+      this.route.params.subscribe((params) =>{
+        let id = params['id'];
+        this.personaService.serIdUser(parseInt(id))
+      })
+      this.router.navigate(['/tablas',this.personaService.idUser]);
     }
   }
 

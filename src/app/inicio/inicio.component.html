@@ -2,11 +2,14 @@
 <header>
     <nav>
         <ul>
-            <li><a routerLink="/tablas" class="active">Inicio</a></li>
-            <li><a (click)="Nuevo()">Nuevo</a></li>
-            <!-- <li><a routerLink="/persona">Persona</a></li>
-            <li><a routerLink="/telefonos">Teléfonos</a></li>
-            <li><a routerLink="/direccion">Dirección</a></li> -->
+            <li><a (click)="regresar()" class="active">
+                <img src="./assets/images/logo.png" alt="Logo"/>
+                Inicio
+            </a></li>
+            <li><a (click)="editarPerfil()">Editar Perfil</a></li>
+            <li><a (click)="Nuevo()">Nuevo Contacto</a></li>
+            <li><a>historial</a></li>
+            <li><a routerLink="/login">Salir</a></li>
         </ul>
     </nav>
 </header>

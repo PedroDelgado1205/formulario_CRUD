@@ -17,6 +17,7 @@ export class PersonaComponent implements OnInit{
   apellidosPersona!: string;
   edadPersona!: number;
   nacionalidadPersona!: string;
+  codigoUsuario!: number;
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -30,6 +31,7 @@ export class PersonaComponent implements OnInit{
         this.apellidosPersona = this.personaService.personaDto.apellidosPersona;
         this.edadPersona = this.personaService.personaDto.edadPersona;
         this.nacionalidadPersona = this.personaService.personaDto.nacionalidadPersona;
+        this.codigoUsuario = this.personaService.personaDto.codigoUsuario;
       }
     });
   }
@@ -43,9 +45,12 @@ export class PersonaComponent implements OnInit{
       this.verificarEdad() && 
       this.verificarNacionalidad()
     ) {
-      //console.log(this.personaService.personaDto);
+      this.route.params.subscribe((params) =>{
+        let id = params['id'];
+        this.personaService.serIdUser(parseInt(id))
+      })
       const objetoSerializado = encodeURIComponent(JSON.stringify(this.personaService.personaDto));
-      this.router.navigate(['/telefonos', objetoSerializado]);
+      this.router.navigate(['/telefonos', objetoSerializado,this.personaService.idUser]);
     }
   }
 

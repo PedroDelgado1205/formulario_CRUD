@@ -6,10 +6,17 @@ import { Injectable } from '@angular/core';
 export class PersonaDtoService {
 
   personaDto: PersonaRequest;
+  userDto: UsuarioRequest;
   edit!: Boolean;
+  idUser!: number;
 
   constructor() { 
     this.personaDto = new PersonaRequest;
+    this.userDto = new UsuarioRequest;
+  }
+
+  serIdUser(id: number){
+    this.idUser = id
   }
 
   setEdiIns(trFa : boolean){
@@ -25,6 +32,7 @@ export class PersonaDtoService {
     this.personaDto.apellidosPersona = objetoDeserializado.apellidosPersona;
     this.personaDto.edadPersona = objetoDeserializado.edadPersona;
     this.personaDto.nacionalidadPersona = objetoDeserializado.nacionalidadPersona;
+    this.personaDto.codigoUsuario = objetoDeserializado.codigoUsuario;
 
     this.personaDto.telefono.codigoTelefono = objetoDeserializado.telefono.codigoTelefono;
     this.personaDto.telefono.codigoPersona = objetoDeserializado.telefono.codigoPersona;
@@ -38,6 +46,13 @@ export class PersonaDtoService {
     this.personaDto.direccion.sectorDireccion = objetoDeserializado.direccion.sectorDireccion;
     this.personaDto.direccion.numeroCasa = objetoDeserializado.direccion.numeroCasa;
 
+  }
+
+  setUserDto(objetoDeserializadoUSER: any): void{
+    this.userDto.codigoUsuario = objetoDeserializadoUSER.codigoUsuario;
+    this.userDto.contrasenaUsuario = objetoDeserializadoUSER.contrasenaUsuario;
+    this.userDto.correoUsuario = objetoDeserializadoUSER.correoUsuario;
+    this.userDto.nombreUsuario = objetoDeserializadoUSER.nombreUsuario;
   }
 }
 class DireccionRequest {
@@ -63,6 +78,14 @@ class PersonaRequest {
   apellidosPersona!: string;
   edadPersona!: number;
   nacionalidadPersona!: string;
+  codigoUsuario!: number;
   direccion: DireccionRequest = new DireccionRequest;
   telefono: TelefonoRequest = new TelefonoRequest;
+}
+
+class UsuarioRequest {
+  codigoUsuario!: number;
+  nombreUsuario!: string;
+  correoUsuario!: string;
+  contrasenaUsuario!: string;
 }

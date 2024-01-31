@@ -1,0 +1,32 @@
+main{
+    width: 35%;
+    margin: auto;
+    padding: auto;
+}
+
+.btn.btn-primary{
+    background-color: #426AA2;
+    border: #264570;
+}
+
+.btn.btn-primary:hover{
+    border: #426AA2;
+    background-color: #264570;
+}
+
+#botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo{
+    width: 50%;
+    margin: auto;
+    padding: auto;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}

@@ -39,8 +39,12 @@ export class TelefonosComponent implements OnInit {
       this.verificarOperadora()
     ){
       console.log(this.personaService.personaDto);
+      this.route.params.subscribe((params) =>{
+        let id = params['id'];
+        this.personaService.serIdUser(parseInt(id))
+      })
       const objetoSerializado = encodeURIComponent(JSON.stringify(this.personaService.personaDto));
-      this.router.navigate(['/direccion', objetoSerializado]);
+      this.router.navigate(['/direccion', objetoSerializado, this.personaService.idUser]);
     }
   }
 

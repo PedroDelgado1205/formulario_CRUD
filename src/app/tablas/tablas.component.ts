@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyApiService } from '../my-api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonaDtoService } from '../persona-dto.service';
 
 @Component({
@@ -10,28 +10,59 @@ import { PersonaDtoService } from '../persona-dto.service';
 })
 
 export class TablasComponent implements OnInit{
-  codigop!: string;
-  cedula!: string;
-  nombre!: string;
-  apellidos!: string;
-  edad!: string;
-  nacionalidad!: string;
-  datosPs: any;
+
+  datosPs: any[] = [];
   datosP: any;
   datosT: any[] = [];
   datosD: any[] = [];
+  codP!: string;
 
-  constructor(private myApiService: MyApiService, private router: Router, public personaService: PersonaDtoService) {}
+  constructor(private route: ActivatedRoute, private myApiService: MyApiService, private router: Router, public personaService: PersonaDtoService) {}
 
   ngOnInit(){
-    this.myApiService.getDatos().subscribe((datos) => {
-      console.log('Personas:', datos);
-      this.datosPs = datos.data;
+    this.route.params.subscribe((params) => {
+      const codigoUser = params['id'];
+      this.myApiService.getDatos(codigoUser).subscribe((datos) => {
+        console.log('Personas:', datos);
+        this.datosPs = datos.data;
+      });
     });
   }
 
-  TelefonDireccion(condigo: string){
-    this.myApiService.getDatosPersona(condigo).subscribe((datosE)=>{
+  TelefonDireccion(codigo: string, index: number){
+    const tabPersona = document.getElementById('tabPersona');
+    const tabTelefono = document.getElementById('tabTelefono');
+    const tabDireccion = document.getElementById('tabDireccion');
+  
+
+    for (let index = 0; index < this.datosPs.length; index++) {
+      const row = tabPersona?.children.item(index);
+      if(row){
+        row.className = ""
+        const tdEliminar = row.children.item(7);
+        const tdEditar = row.children.item(8);
+        const btnEditar = tdEditar?.children.item(0);
+        const btnEliminar = tdEliminar?.children.item(0);
+        btnEditar?.setAttribute('disabled', 'true');
+        btnEliminar?.setAttribute('disabled', 'true');
+      }
+    }
+
+    const row = tabPersona?.children.item(index);
+    if(row){
+      row.className="table-warning";
+      const tdEliminar = row.children.item(7);
+      const tdEditar = row.children.item(8);
+      const btnEditar = tdEditar?.children.item(0);
+      const btnEliminar = tdEliminar?.children.item(0);
+      btnEliminar?.removeAttribute("disabled");
+      btnEditar?.removeAttribute("disabled");
+    }
+
+    tabTelefono?.remove();
+    tabDireccion?.remove();
+
+    this.myApiService.getDatosPersona(codigo).subscribe((datosE)=>{
       console.log('Persona:',datosE.data);
       console.log('Telefono:', datosE.data.telefono);
       console.log('Direccion:', datosE.data.direccion);
@@ -39,18 +70,35 @@ export class TablasComponent implements OnInit{
       this.datosD.push(datosE.data.direccion);
       this.datosP=datosE.data;
     });
-    const btnEditar = document.getElementById("btnEditar");
-    const btnEliminar = document.getElementById("btnEliminar");
-    btnEditar?.removeAttribute('disabled');
-    btnEliminar?.removeAttribute('disabled');
+
+    this.Codigo(codigo);
   }
 
   Editar(){
     const objetoSerializado = encodeURIComponent(JSON.stringify(this.datosP));
     this.personaService.setEdiIns(true);
-    this.router.navigate(['/persona', objetoSerializado]);
+    this.route.params.subscribe((params) =>{
+      let id = params['id'];
+      this.personaService.serIdUser(parseInt(id))
+    })
+    this.router.navigate(['/persona', objetoSerializado, this.personaService.idUser]);
   }
 
-  Eliminar(condigo: string){
+  Eliminar(){
+    console.log(this.codP)
+    this.myApiService.eliminarPersona(this.codP).subscribe((res) => {
+      console.log(res);
+    });
+    this.route.params.subscribe((params) =>{
+      let id = params['id'];
+      this.personaService.serIdUser(parseInt(id))
+    })
+    this.router.navigate(['/tablas',this.personaService.idUser]);
+  }
+
+  Codigo(codigo: string):String{
+    this.codP = codigo;
+    console.log(this.codP);
+    return this.codP;
   }
 }

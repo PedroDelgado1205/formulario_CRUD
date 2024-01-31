@@ -54,7 +54,13 @@ header{
     justify-content: space-evenly;
 }
 
-#modal{
+#modalInsercion{
+    border: 1px gray;
+    border-radius: 10px;
+    width: 30%;
+}
+
+#modalEdicion{
     border: 1px gray;
     border-radius: 10px;
     width: 30%;

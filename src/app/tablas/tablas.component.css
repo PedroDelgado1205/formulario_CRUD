@@ -43,3 +43,31 @@
     align-items: center;
     border-bottom: #FB9224 double;
 }
+
+.table-active{
+    background-color: #af691d;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+
+#mensaje{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+#btnsGuardar{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#modalEliminacion{
+    border: 1px gray;
+    border-radius: 10px;
+    width: 30%;
+}
