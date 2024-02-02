@@ -23,5 +23,22 @@
         <input [(ngModel)]="contrasenaR" id="contrasenaR" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled="true">
     </div>
     <button type="submit" class="btn btn-primary" (click)="editar()">Editar perfil</button>
-    <button type="submit" class="btn btn-primary" (click)="eliminar()">Eliminar perfil</button>
+    <button type="submit" class="btn btn-primary" onclick="window.modalEliminacion.showModal();">Eliminar perfil</button>
 </section>
+
+<dialog id="modalEliminacion">
+    <header>
+        <h5>Alerta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onclick="window.modalEliminacion.close();"></button>
+    </header>
+    <hr>
+    <section>
+        <div id="mensaje">
+            <h4>¿Está seguro que desea ELIMINAR este registro? Esto no se puede deshacer.</h4>
+        </div>
+        <div id="btnsGuardar">
+            <button type="button" class="btn btn-primary" onclick="window.modalEliminacion.close();" (click)="eliminar()">Guardar</button>
+            <button type="button" class="btn btn-danger" onclick="window.modalEliminacion.close();">Cancelar</button>
+        </div>
+    </section>
+</dialog>

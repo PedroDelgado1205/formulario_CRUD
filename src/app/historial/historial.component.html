@@ -1,0 +1,24 @@
+<app-inicio></app-inicio>
+<section id="historial">
+    <div class="container">
+        <table class="table table-bordered table-sm"> 
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Reporte</th>
+                </tr>
+            </thead>
+            <tbody table-group-divider>
+                <tr *ngFor="let i of datosH, let y = index" id="tabTelefono">
+                    <td> {{ y+1 }} </td>
+                    <td> {{ i.fecha }} </td>
+                    <td><button type="button" class="btn btn-primary" (click)="verDetalle(i.codigoHistorial)">Ver Detalles</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <section id="report">
+            <textarea name="reporte" id="reporte" cols="150" rows="10">{{ reporte }}</textarea>
+        </section>
+    </div>
+</section>

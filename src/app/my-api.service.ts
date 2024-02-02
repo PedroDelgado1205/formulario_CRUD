@@ -87,7 +87,35 @@ export class MyApiService {
     );
   }
 
-  eliminarUsuario(codigoUsuario: string){
+  eliminarUsuario(codigoUsuario: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/eliminarUsuario/${codigoUsuario}`)
+  }
+
+  getHistorial(codigoUsuario: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/ObtenerHistorial/${codigoUsuario}`)
+  }
+
+  getHistorialReciente(codigoHistorial: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/ObtenerHistorialReciente/${codigoHistorial}`)
+  }
+
+  insertarHistorail(historial: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/InsertarHistorial`,historial)
+    .pipe(
+      catchError(error => {
+        console.log('Error en la solicitud:', error);
+        return throwError(error);
+      })
+    )
+  }
+
+  editarHistorial(historial: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/EditarHistorial`,historial)
+    .pipe(
+      catchError(error => {
+        console.log('Error en la solicitud:', error);
+        return throwError(error);
+      })
+    )
   }
 }

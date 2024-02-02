@@ -19,6 +19,8 @@ export class InicioComponent implements OnInit{
     this.route.params.subscribe((params) =>{
       let id = params['id'];
       this.personaService.serIdUser(parseInt(id))
+      let idH = params['hi'];
+      this.personaService.setIdHistorial(parseInt(idH))
     })
     this.myApiService.getTotalPersonas().subscribe((res)=>{
       this.totalCodigos = res.data.length;
@@ -27,11 +29,15 @@ export class InicioComponent implements OnInit{
   }
 
   editarPerfil(){
-    this.router.navigate(['/editarPrfil',this.personaService.idUser]);
+    this.router.navigate(['/editarPrfil',this.personaService.idUser,this.personaService.idHistorial]);
   }
 
   regresar(){
-    this.router.navigate(['/tablas',this.personaService.idUser]);
+    this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
+  }
+
+  historial(){
+    this.router.navigate(['/historial',this.personaService.idUser,this.personaService.idHistorial]);
   }
 
   Nuevo(){
@@ -61,7 +67,7 @@ export class InicioComponent implements OnInit{
 
     const objetoSerializado = encodeURIComponent(JSON.stringify(this.personaService.personaDto));
     this.personaService.setEdiIns(false);
-    this.router.navigate(['/persona',objetoSerializado,this.personaService.idUser]);
+    this.router.navigate(['/persona',objetoSerializado,this.personaService.idUser,this.personaService.idUser]);
   }
 }
 

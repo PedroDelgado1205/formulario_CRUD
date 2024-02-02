@@ -27,6 +27,8 @@ datos: any;
     this.route.params.subscribe((params) =>{
       let id = params['id'];
       this.personaService.serIdUser(parseInt(id))
+      let idH = params['hi'];
+      this.personaService.setIdHistorial(parseInt(idH))
     })
     console.log(this.personaService.idUser);
     this.myApiService.getUserCodigo(this.personaService.idUser).subscribe((res) => {
@@ -39,6 +41,24 @@ datos: any;
       this.contrasenaR = this.contrasena;
       console.log(this.datos)
     });
+  }
+
+  editarMensaje(mensaje: string){
+    this.route.params.subscribe((params) =>{
+      let id = params['id'];
+      this.personaService.serIdUser(parseInt(id))
+      let idH = params['hi'];
+    this.personaService.setIdHistorial(parseInt(idH))
+    })
+    this.myApiService.getHistorialReciente(this.personaService.idHistorial).subscribe((res)=>{
+      console.log(res);
+      this.personaService.setHistorialDto(res.data);
+      this.personaService.historilaDto.mensaje = this.personaService.historilaDto.mensaje + mensaje;
+      console.log(this.personaService.historilaDto.mensaje);
+      this.myApiService.editarHistorial(this.personaService.historilaDto).subscribe((res)=>{
+        console.log(res);
+      })
+    })
   }
 
   verClave() {
@@ -66,11 +86,23 @@ datos: any;
   }
 
   eliminar(){
+    this.route.params.subscribe((params) =>{
+      let id = params['id'];
+      this.personaService.serIdUser(parseInt(id));
+    })
     this.myApiService.getDatos(this.codigo).subscribe((personas)=>{
       for (let i = 0; i < personas.data.length; i++) {
         this.codigoPersonas.push(personas.data[i].codigoPersona)
       }
-      console.log(this.codigoPersonas);
+      for(let i = 0; i < this.codigoPersonas.length; i++){
+        this.myApiService.eliminarPersona(this.codigoPersonas[i].toString()).subscribe((r)=>{
+          console.log(r);
+        })
+      }
+      this.myApiService.eliminarUsuario(this.personaService.idUser).subscribe((res)=>{
+        console.log(res)
+      })
+      this.router.navigate(['/login']);
     })
   }
 
@@ -108,7 +140,9 @@ datos: any;
       this.myApiService.editarUsuario(this.personaService.userDto).subscribe((res)=>{
         console.log(res);
       });
-      this.router.navigate(['/tablas',this.personaService.idUser]);
+      let mensaje = ' Perfil Editado';
+      this.editarMensaje(mensaje)
+      this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
     }else{
       console.log("Todos los campos deben ser llenados correctamente");
     }

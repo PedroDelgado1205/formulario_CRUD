@@ -80,8 +80,10 @@ export class TablasComponent implements OnInit{
     this.route.params.subscribe((params) =>{
       let id = params['id'];
       this.personaService.serIdUser(parseInt(id))
+      let idH = params['hi'];
+      this.personaService.setIdHistorial(parseInt(idH))
     })
-    this.router.navigate(['/persona', objetoSerializado, this.personaService.idUser]);
+    this.router.navigate(['/persona', objetoSerializado, this.personaService.idUser,this.personaService.idHistorial]);
   }
 
   Eliminar(){
@@ -92,13 +94,35 @@ export class TablasComponent implements OnInit{
     this.route.params.subscribe((params) =>{
       let id = params['id'];
       this.personaService.serIdUser(parseInt(id))
+      let idH = params['hi'];
+      this.personaService.setIdHistorial(parseInt(idH))
     })
-    this.router.navigate(['/tablas',this.personaService.idUser]);
+    let mensaje = ' Contacto Eliminado';
+    this.editarMensaje(mensaje)
+    this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
   }
 
   Codigo(codigo: string):String{
     this.codP = codigo;
     console.log(this.codP);
     return this.codP;
+  }
+
+  editarMensaje(mensaje: string){
+    this.route.params.subscribe((params) =>{
+      let id = params['id'];
+      this.personaService.serIdUser(parseInt(id))
+      let idH = params['hi'];
+    this.personaService.setIdHistorial(parseInt(idH))
+    })
+    this.myApiService.getHistorialReciente(this.personaService.idHistorial).subscribe((res)=>{
+      console.log(res);
+      this.personaService.setHistorialDto(res.data);
+      this.personaService.historilaDto.mensaje = this.personaService.historilaDto.mensaje + mensaje;
+      console.log(this.personaService.historilaDto.mensaje);
+      this.myApiService.editarHistorial(this.personaService.historilaDto).subscribe((res)=>{
+        console.log(res);
+      })
+    })
   }
 }

@@ -7,12 +7,19 @@ export class PersonaDtoService {
 
   personaDto: PersonaRequest;
   userDto: UsuarioRequest;
+  historilaDto: HistorialRequest;
   edit!: Boolean;
   idUser!: number;
+  idHistorial!: number;
 
   constructor() { 
     this.personaDto = new PersonaRequest;
     this.userDto = new UsuarioRequest;
+    this.historilaDto = new HistorialRequest;
+  }
+
+  setIdHistorial(idH: number){
+    this.idHistorial = idH
   }
 
   serIdUser(id: number){
@@ -54,6 +61,14 @@ export class PersonaDtoService {
     this.userDto.correoUsuario = objetoDeserializadoUSER.correoUsuario;
     this.userDto.nombreUsuario = objetoDeserializadoUSER.nombreUsuario;
   }
+
+  setHistorialDto(objetoDeserializadoHistorial: any): void{
+    this.historilaDto.codigoHistorial = objetoDeserializadoHistorial.codigoHistorial;
+    this.historilaDto.nombreUsuario = objetoDeserializadoHistorial.nombreUsuario;
+    this.historilaDto.fecha = objetoDeserializadoHistorial.fecha;
+    this.historilaDto.mensaje = objetoDeserializadoHistorial.mensaje;
+    this.historilaDto.codigoUsuario = objetoDeserializadoHistorial.codigoUsuario;
+  }
 }
 class DireccionRequest {
   codigoDireccion!: string;
@@ -88,4 +103,12 @@ class UsuarioRequest {
   nombreUsuario!: string;
   correoUsuario!: string;
   contrasenaUsuario!: string;
+}
+
+class HistorialRequest {
+  codigoHistorial!: number;
+  nombreUsuario!: string;
+  fecha!: string;
+  mensaje!: string;
+  codigoUsuario!: number;
 }

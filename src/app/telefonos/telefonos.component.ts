@@ -42,9 +42,11 @@ export class TelefonosComponent implements OnInit {
       this.route.params.subscribe((params) =>{
         let id = params['id'];
         this.personaService.serIdUser(parseInt(id))
+        let idH = params['hi'];
+        this.personaService.setIdHistorial(parseInt(idH))
       })
       const objetoSerializado = encodeURIComponent(JSON.stringify(this.personaService.personaDto));
-      this.router.navigate(['/direccion', objetoSerializado, this.personaService.idUser]);
+      this.router.navigate(['/direccion', objetoSerializado, this.personaService.idUser,this.personaService.idHistorial]);
     }
   }
 

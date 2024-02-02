@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { RecuperarContraseniaComponent } from './recuperar-contrasenia/recuperar-contrasenia.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
+import { HistorialComponent } from './historial/historial.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
     RegistroComponent,
     RecuperarContraseniaComponent,
     EditarPerfilComponent,
+    HistorialComponent,
   ],
   imports: [
     BrowserModule,
