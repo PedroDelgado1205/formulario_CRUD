@@ -1,0 +1,27 @@
+#container{
+    width: 80%;
+    margin: auto;
+    padding: auto;
+}
+
+.historial{
+    width: 50%;
+    margin: auto;
+    padding: auto;
+}
+
+.historial table thead tr th{
+    text-align: center;
+}
+
+.historial table tbody tr td{
+    text-align: center;
+}
+
+.report table thead tr th{
+    text-align: center;
+}
+
+.report table tbody tr td{
+    text-align: center;
+}

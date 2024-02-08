@@ -118,4 +118,18 @@ export class MyApiService {
       })
     )
   }
+
+  getContresania(codUsuario: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/ObtenerContrasenias/${codUsuario}`);
+  }
+
+  insertarContrasenias(contrasenia: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/InsertarContrasenias`,contrasenia)
+    .pipe(
+      catchError(error => {
+        console.log('Error en la solicitud:', error);
+        return throwError(error);
+      })
+    )
+  }
 }

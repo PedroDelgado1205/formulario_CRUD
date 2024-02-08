@@ -97,12 +97,9 @@ export class RegistroComponent implements OnInit {
   }
 
   validarContraseña():Boolean{
-    const contraseña = document.getElementById('contraseñaUsuario');
-    const contraseñaR = document.getElementById('contraseñaUsuarioR');
-    if(
-      (this.contrasenaUsuario == null || this.contrasenaUsuario == undefined || this.contrasenaUsuario == '') && 
-      (this.contrasenaUsuarioR == null || this.contrasenaUsuarioR == undefined || this.contrasenaUsuarioR == ''))
-    {
+    const contraseña = document.getElementById('contrasena');
+    const contraseñaR = document.getElementById('contrasenaR');
+    if((this.contrasenaUsuario == null || this.contrasenaUsuario == undefined || this.contrasenaUsuario == '') &&  (this.contrasenaUsuarioR == null || this.contrasenaUsuarioR == undefined || this.contrasenaUsuarioR == '')){
       contraseña?.classList.remove('form-control', 'is-valid');
       contraseña?.classList.add('form-control', 'is-invalid');
       contraseña?.setAttribute('placeholder','campo obligatorio');
@@ -110,24 +107,67 @@ export class RegistroComponent implements OnInit {
       contraseñaR?.classList.add('form-control', 'is-invalid');
       contraseñaR?.setAttribute('placeholder','campo obligatorio');
       console.log('campo obligatorio');
+      this.contrasenaUsuario="";
+      this.contrasenaUsuarioR="";
       return false;
     }else{
-      if(this.contrasenaUsuario == this.contrasenaUsuarioR){
-        contraseña?.classList.remove('form-control', 'is-invalid');
-        contraseña?.classList.add('form-control', 'is-valid');
-        contraseñaR?.classList.remove('form-control', 'is-invalid');
-        contraseñaR?.classList.add('form-control', 'is-valid');
-        this.personaService.userDto.contrasenaUsuario = this.contrasenaUsuario;
-        return true;
-      }else{
+      if(this.contrasenaUsuario != this.contrasenaUsuarioR){
         contraseña?.classList.remove('form-control', 'is-valid');
         contraseña?.classList.add('form-control', 'is-invalid');
         contraseña?.setAttribute('placeholder','las contraseñas no coinciden');
         contraseñaR?.classList.remove('form-control', 'is-valid');
         contraseñaR?.classList.add('form-control', 'is-invalid');
         contraseñaR?.setAttribute('placeholder','las contraseñas no coinciden');
-        console.log('campo obligatorio');
+        console.log('las contraseñas no coinciden');
+        this.contrasenaUsuario="";
+        this.contrasenaUsuarioR="";
         return false;
+      }else{
+        if(this.contrasenaUsuario.length < 8) {
+          contraseña?.classList.remove('form-control', 'is-valid');
+          contraseña?.classList.add('form-control', 'is-invalid');
+          contraseña?.setAttribute('placeholder','la contraseña debe tener un minimo de 8 caracteres');
+          contraseñaR?.classList.remove('form-control', 'is-valid');
+          contraseñaR?.classList.add('form-control', 'is-invalid');
+          contraseñaR?.setAttribute('placeholder','la contraseña debe tener un minimo de 8 caracteres');
+          console.log('la contraseña debe tener un minimo de 8 caracteres');
+          this.contrasenaUsuario="";
+          this.contrasenaUsuarioR="";
+          return false;
+          }else{
+            if(this.contrasenaUsuario.length > 16){
+              contraseña?.classList.remove('form-control', 'is-valid');
+              contraseña?.classList.add('form-control', 'is-invalid');
+              contraseña?.setAttribute('placeholder','la contraseña debe tener un maximo 16 caracteres');
+              contraseñaR?.classList.remove('form-control', 'is-valid');
+              contraseñaR?.classList.add('form-control', 'is-invalid');
+              contraseñaR?.setAttribute('placeholder','la contraseña debe tener un maximo 16 caracteres');
+              console.log('la contraseña debe tener un maximo 16 caracteres');
+              this.contrasenaUsuario="";
+              this.contrasenaUsuarioR="";
+              return false;
+            }else{
+            if(!/[!@#$%^&*(),.?":{}|<>]/.test(this.contrasenaUsuario)) {
+              contraseña?.classList.remove('form-control', 'is-valid');
+              contraseña?.classList.add('form-control', 'is-invalid');
+              contraseña?.setAttribute('placeholder','las contraseña debe contar con almenos  un carácter especial');
+              contraseñaR?.classList.remove('form-control', 'is-valid');
+              contraseñaR?.classList.add('form-control', 'is-invalid');
+              contraseñaR?.setAttribute('placeholder','las contraseña debe contar con almenos  un carácter especial');
+              console.log('las contraseña debe contar con almenos  un carácter especial');
+              this.contrasenaUsuario="";
+              this.contrasenaUsuarioR="";
+              return false;
+            }else{
+              contraseña?.classList.remove('form-control', 'is-invalid');
+              contraseña?.classList.add('form-control', 'is-valid');
+              contraseñaR?.classList.remove('form-control', 'is-invalid');
+              contraseñaR?.classList.add('form-control', 'is-valid');
+              this.personaService.userDto.contrasenaUsuario = this.contrasenaUsuario;
+              return true;
+            }
+          }
+        }
       }
     }
   }

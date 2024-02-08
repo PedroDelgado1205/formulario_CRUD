@@ -1,6 +1,6 @@
 <app-inicio></app-inicio>
-<section id="historial">
-    <div class="container">
+<section id="container">
+    <section class="historial">
         <table class="table table-bordered table-sm"> 
             <thead>
                 <tr>
@@ -9,16 +9,46 @@
                     <th scope="col">Reporte</th>
                 </tr>
             </thead>
-            <tbody table-group-divider>
-                <tr *ngFor="let i of datosH, let y = index" id="tabTelefono">
+            <tbody table-group-divider id="tablaReporte">
+                <tr *ngFor="let i of datosH, let y = index">
                     <td> {{ y+1 }} </td>
                     <td> {{ i.fecha }} </td>
-                    <td><button type="button" class="btn btn-primary" (click)="verDetalle(i.codigoHistorial)">Ver Detalles</button></td>
+                    <td><button type="button" class="btn btn-primary" (click)="verDetalle(i.codigoHistorial, y)">Ver Detalles</button></td>
                 </tr>
             </tbody>
         </table>
-        <section id="report">
-            <textarea name="reporte" id="reporte" cols="150" rows="10">{{ reporte }}</textarea>
-        </section>
-    </div>
+    </section>
+    <section class="report">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Codigo Historial</th>
+                    <th scope="col">Codigo Usuario</th>
+                    <th scope="col">Nombre Usuario</th>
+                    <th scope="col">Fecha de Inicio de Sesion</th>
+                    <th scope="col">Acciones Realizadas</th>
+                    <th scope="col">Fecha del Reporte</th>
+                </tr>
+            </thead>
+            <tbody table-group-divider>
+                <tr id="tabTelefono">
+                    <td> {{ codigoHistorial }} </td>
+                    <td> {{ codigoHistorial }} </td>
+                    <td> {{ nombreUsuario }} </td>
+                    <td> {{ fechaInicio }} </td>
+                    <td> 
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Acciones Realizadas {{ acionesRealizadas.length }}
+                            </button>
+                            <div class="dropdown-menu p-4 text-body-secondary">
+                                <p *ngFor="let i of acciones">¤ {{ i }}</p>
+                            </div>
+                        </div>  
+                    </td>
+                    <td> {{ fechaReporte }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 </section>

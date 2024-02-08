@@ -97,7 +97,7 @@ export class TablasComponent implements OnInit{
       let idH = params['hi'];
       this.personaService.setIdHistorial(parseInt(idH))
     })
-    let mensaje = ' Contacto Eliminado';
+    let mensaje = '-Contacto Eliminado';
     this.editarMensaje(mensaje)
     this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
   }

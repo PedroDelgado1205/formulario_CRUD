@@ -103,20 +103,15 @@ export class LoginComponent implements OnInit {
   }
 
   nuevoHistorial(id: number){
-    let fecha = new Date();
-    let day = fecha.getDay();
-    let month = fecha.getMonth();
-    let year = fecha.getFullYear();
-    let hours = fecha.getHours();
-    let minutes = fecha.getMinutes(); 
-    let seconds = fecha.getSeconds();
+    let fecha = new Date().toLocaleDateString();
+    let tiempo = new Date().toLocaleTimeString();
 
     this.myApiService.getHistorial(id).subscribe((res)=>{
       this.datosH = res;
       this.idH =  this.datosH.data.length + 1;
       this.personaService.historilaDto.codigoHistorial = this.datosH.data.length + 1;
       this.personaService.historilaDto.codigoUsuario = id;
-      this.personaService.historilaDto.fecha = `${day}/${month}/${year} : ${hours}:${minutes}:${seconds}`;
+      this.personaService.historilaDto.fecha = `${fecha} : ${tiempo}`;
       this.personaService.historilaDto.mensaje = "Nuevo inicio de sesion";
       this.personaService.historilaDto.nombreUsuario = this.nombre;
       console.log(this.personaService.historilaDto);

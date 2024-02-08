@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MyApiService } from '../my-api.service';
 import { PersonaDtoService } from '../persona-dto.service';
 import { identifierName } from '@angular/compiler';
+import { Observable, map } from 'rxjs';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -18,8 +20,15 @@ usuario!: string;
 correo!: string;
 contrasena!: string;
 contrasenaR!: string;
+contrasenaA!: string;
+contrasenaAe!: string;
 codigoPersonas: string [] = []
 datos: any;
+contrasenasAntiguas: any;
+contasenaPas!: string;
+tf: boolean = false;
+ft: boolean = false;
+verificador!: boolean;
 
   constructor(private myApiService: MyApiService, private router: Router, private route: ActivatedRoute, public personaService: PersonaDtoService) {}
 
@@ -34,11 +43,12 @@ datos: any;
     this.myApiService.getUserCodigo(this.personaService.idUser).subscribe((res) => {
       this.datos = res;
       this.personaService.setUserDto(res.data);
-      this.codigo = this.personaService.userDto.codigoUsuario
+      this.codigo = this.personaService.userDto.codigoUsuario;
       this.usuario = this.personaService.userDto.nombreUsuario; 
       this.correo = this.personaService.userDto.correoUsuario;
       this.contrasena = this.personaService.userDto.contrasenaUsuario;
       this.contrasenaR = this.contrasena;
+      this.contasenaPas = this.contrasena;
       console.log(this.datos)
     });
   }
@@ -103,7 +113,7 @@ datos: any;
         console.log(res)
       })
       this.router.navigate(['/login']);
-    })
+    });
   }
 
   editar(){
@@ -112,6 +122,7 @@ datos: any;
     const iptCorreo = document.getElementById('correo');
     const iptContrasena = document.getElementById('contrasena');
     const iptContrasenaR = document.getElementById('contrasenaR');
+    const contrasenaA = document.getElementById('contrasenaAedi')
 
     if(this.edi == true){
       contraRep?.removeAttribute('hidden');
@@ -119,6 +130,7 @@ datos: any;
       iptCorreo?.removeAttribute('disabled');
       iptContrasena?.removeAttribute('disabled');
       iptContrasenaR?.removeAttribute('disabled');
+      contrasenaA?.removeAttribute('hidden');
       this.edi = false;
     }else{
       contraRep?.setAttribute('hidden', 'true');
@@ -126,8 +138,11 @@ datos: any;
       iptCorreo?.setAttribute('disabled', 'true');
       iptContrasena?.setAttribute('disabled', 'true');
       iptContrasenaR?.setAttribute('disabled', 'true');
+      contrasenaA?.setAttribute('hidden','true');
       this.edi = true
-      this.validar();
+      if(this.validarContraseñaPasadaEdicion()){
+        this.validar();
+      }
     }
   }
 
@@ -140,11 +155,73 @@ datos: any;
       this.myApiService.editarUsuario(this.personaService.userDto).subscribe((res)=>{
         console.log(res);
       });
-      let mensaje = ' Perfil Editado';
+      let mensaje = '-Perfil Editado';
       this.editarMensaje(mensaje)
       this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
     }else{
       console.log("Todos los campos deben ser llenados correctamente");
+    }
+  }
+
+  validarEliminacion(){
+    if(this.validarContraseñaPasada()){
+      this.eliminar();
+    }
+  }
+
+  validarContraseñaPasadaEdicion(): Boolean {
+    const contraseñaA = document.getElementById('contrasenaAe')
+    if(this.contrasenaAe == null || this.contrasenaAe == undefined || this.contrasenaAe == ""){
+      contraseñaA?.classList.remove('form-control', 'is-valid');
+      contraseñaA?.classList.add('form-control','is-invalid');
+      contraseñaA?.setAttribute('placeholder','campo obligatorio');
+      console.log('campo obligatorio');
+      this.contrasenaA = "";
+      console.log("f")
+      return false;
+    } else {
+      if(this.contrasenaAe == this.contasenaPas){
+        contraseñaA?.classList.remove('form-control','is-invalid');
+        contraseñaA?.classList.add('form-control', 'is-valid');
+        console.log("t")
+        return true;
+      }else{
+        contraseñaA?.classList.remove('form-control', 'is-valid');
+        contraseñaA?.classList.add('form-control','is-invalid');
+        contraseñaA?.setAttribute('placeholder','no coincide con su contraseña antigua');
+        console.log('no coincide con su contraseña antigua');
+        this.contrasenaAe = "";
+        console.log("f")
+        return false;
+      }  
+    }
+  }
+
+  validarContraseñaPasada(): Boolean {
+    const contraseñaA = document.getElementById('contrasenaA')
+    if(this.contrasenaA == null || this.contrasenaA == undefined || this.contrasenaA == ""){
+      contraseñaA?.classList.remove('form-control', 'is-valid');
+      contraseñaA?.classList.add('form-control','is-invalid');
+      contraseñaA?.setAttribute('placeholder','campo obligatorio');
+      console.log('campo obligatorio');
+      this.contrasenaA = "";
+      console.log("f")
+      return false;
+    } else {
+      if(this.contrasenaA != this.contasenaPas){
+        contraseñaA?.classList.remove('form-control', 'is-valid');
+        contraseñaA?.classList.add('form-control','is-invalid');
+        contraseñaA?.setAttribute('placeholder','no coincide con su contraseña antigua');
+        console.log('no coincide con su contraseña antigua');
+        this.contrasenaA = "";
+        console.log("f")
+        return false;
+      }else{
+        contraseñaA?.classList.remove('form-control','is-invalid');
+        contraseñaA?.classList.add('form-control', 'is-valid');
+        console.log("t")
+        return true;
+      }  
     }
   }
 
@@ -156,12 +233,14 @@ datos: any;
       nombre?.setAttribute('placeholder','campo obligatorio');
       this.usuario="";
       console.log('campo obligatorio');
+      console.log("f")
       return false;
     }else{
       nombre?.classList.remove('form-control', 'is-invalid');
       nombre?.classList.add('form-control', 'is-valid');
       console.log(this.usuario)
       this.personaService.userDto.nombreUsuario = this.usuario;
+      console.log("t")
       return true;
     }
   }
@@ -174,6 +253,7 @@ datos: any;
       this.correo = '';
       email?.setAttribute('placeholder','campo obligatorio');
       console.log('campo obligatorio');
+      console.log("f")
       return false;
     }else{
       const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -182,6 +262,7 @@ datos: any;
         email?.classList.add('form-control', 'is-valid');;
         console.log(this.correo)
         this.personaService.userDto.correoUsuario = this.correo;
+        console.log("t")
         return true;
       }else{
         email?.classList.remove('form-control', 'is-valid');
@@ -189,44 +270,131 @@ datos: any;
         email?.setAttribute('placeholder','correo invalido');
         this.correo='';
         console.log('campo obligatorio');
+        console.log("f")
         return false;
       }
     }
   }
 
-  validarContraseña():Boolean{
+  validarContraseña(): boolean {
     const contraseña = document.getElementById('contrasena');
     const contraseñaR = document.getElementById('contrasenaR');
-    if(
-      (this.contrasena == null || this.contrasena == undefined || this.contrasena == '') && 
-      (this.contrasenaR == null || this.contrasenaR == undefined || this.contrasenaR == ''))
-    {
+
+    if ((this.contrasena == null || this.contrasena == undefined || this.contrasena == '') && (this.contrasenaR == null || this.contrasenaR == undefined || this.contrasenaR == '')) {
       contraseña?.classList.remove('form-control', 'is-valid');
       contraseña?.classList.add('form-control', 'is-invalid');
-      contraseña?.setAttribute('placeholder','campo obligatorio');
+      contraseña?.setAttribute('placeholder', 'campo obligatorio');
       contraseñaR?.classList.remove('form-control', 'is-valid');
       contraseñaR?.classList.add('form-control', 'is-invalid');
-      contraseñaR?.setAttribute('placeholder','campo obligatorio');
+      contraseñaR?.setAttribute('placeholder', 'campo obligatorio');
       console.log('campo obligatorio');
-      return false;
-    }else{
-      if(this.contrasena == this.contrasenaR){
-        contraseña?.classList.remove('form-control', 'is-invalid');
-        contraseña?.classList.add('form-control', 'is-valid');
-        contraseñaR?.classList.remove('form-control', 'is-invalid');
-        contraseñaR?.classList.add('form-control', 'is-valid');
-        this.personaService.userDto.contrasenaUsuario = this.contrasena;
-        return true;
-      }else{
+      this.contrasena = "";
+      this.contrasenaR = "";
+      console.log("f")
+      this.ft = false;
+    } else {
+      if (this.contrasena != this.contrasenaR) {
         contraseña?.classList.remove('form-control', 'is-valid');
         contraseña?.classList.add('form-control', 'is-invalid');
-        contraseña?.setAttribute('placeholder','las contraseñas no coinciden');
+        contraseña?.setAttribute('placeholder', 'las contraseñas no coinciden');
         contraseñaR?.classList.remove('form-control', 'is-valid');
         contraseñaR?.classList.add('form-control', 'is-invalid');
-        contraseñaR?.setAttribute('placeholder','las contraseñas no coinciden');
-        console.log('campo obligatorio');
-        return false;
+        contraseñaR?.setAttribute('placeholder', 'las contraseñas no coinciden');
+        console.log('las contraseñas no coinciden');
+        this.contrasena = "";
+        this.contrasenaR = "";
+        console.log("f")
+        this.ft = false;
+      } else {
+        if (this.contrasena.length < 8) {
+          contraseña?.classList.remove('form-control', 'is-valid');
+          contraseña?.classList.add('form-control', 'is-invalid');
+          contraseña?.setAttribute('placeholder', 'la contraseña debe tener un mínimo de 8 caracteres');
+          contraseñaR?.classList.remove('form-control', 'is-valid');
+          contraseñaR?.classList.add('form-control', 'is-invalid');
+          contraseñaR?.setAttribute('placeholder', 'la contraseña debe tener un mínimo de 8 caracteres');
+          console.log('la contraseña debe tener un mínimo de 8 caracteres');
+          this.contrasena = "";
+          this.contrasenaR = "";
+          console.log("f")
+          this.ft = false;
+        } else {
+          if (this.contrasena.length > 16) {
+            contraseña?.classList.remove('form-control', 'is-valid');
+            contraseña?.classList.add('form-control', 'is-invalid');
+            contraseña?.setAttribute('placeholder', 'la contraseña debe tener un máximo de 16 caracteres');
+            contraseñaR?.classList.remove('form-control', 'is-valid');
+            contraseñaR?.classList.add('form-control', 'is-invalid');
+            contraseñaR?.setAttribute('placeholder', 'la contraseña debe tener un máximo de 16 caracteres');
+            console.log('la contraseña debe tener un máximo de 16 caracteres');
+            this.contrasena = "";
+            this.contrasenaR = "";
+            console.log("f")
+            this.ft = false;
+          } else {
+            if (!/[!@#$%^&*(),.?":{}|<>]/.test(this.contrasena)) {
+              contraseña?.classList.remove('form-control', 'is-valid');
+              contraseña?.classList.add('form-control', 'is-invalid');
+              contraseña?.setAttribute('placeholder', 'la contraseña debe contener al menos un carácter especial');
+              contraseñaR?.classList.remove('form-control', 'is-valid');
+              contraseñaR?.classList.add('form-control', 'is-invalid');
+              contraseñaR?.setAttribute('placeholder', 'la contraseña debe contener al menos un carácter especial');
+              console.log('la contraseña debe contener al menos un carácter especial');
+              this.contrasena = "";
+              this.contrasenaR = "";
+              console.log("f")
+              this.ft = false;
+            } else {
+              this.contraseñaPasadas().subscribe( tf => {
+                if (tf == true){
+                  contraseña?.classList.remove('form-control', 'is-valid');
+                  contraseña?.classList.add('form-control', 'is-invalid');
+                  contraseña?.setAttribute('placeholder', 'No puede usar una contraseña pasada');
+                  contraseñaR?.classList.remove('form-control', 'is-valid');
+                  contraseñaR?.classList.add('form-control', 'is-invalid');
+                  contraseñaR?.setAttribute('placeholder', 'No puede usar una contraseña pasada');
+                  console.log('No puede usar una contraseña pasada');
+                  this.contrasena = "";
+                  this.contrasenaR = "";
+                  return this.ft = false;
+                }else{
+                  contraseña?.classList.remove('form-control', 'is-invalid');
+                  contraseña?.classList.add('form-control', 'is-valid');
+                  contraseñaR?.classList.remove('form-control', 'is-invalid');
+                  contraseñaR?.classList.add('form-control', 'is-valid');
+                  return this.ft = true;
+                }
+              })
+            }
+          }
+        }
       }
     }
+    console.log(this.ft)
+    return this.ft;
   }
-}
+
+  contraseñaPasadas(): Observable<boolean> {
+    return this.myApiService.getContresania(this.codigo).pipe(
+      map((res) => {
+        const tf = res.data.some((item: any) => {
+          this.personaService.setContraseniaDto(item);
+          console.log(this.contrasena, "=", item.contraseniaPasada);
+          console.log(this.contrasena == this.personaService.contraseniaDto.contraseniaPasada)
+          return this.contrasena == this.personaService.contraseniaDto.contraseniaPasada;
+        });
+        console.log(tf);
+        if (tf == false){
+          this.personaService.userDto.contrasenaUsuario = this.contrasena;
+          this.personaService.contraseniaDto.codigoUsuario = this.personaService.userDto.codigoUsuario;
+          this.personaService.contraseniaDto.contraseniaPasada = this.contrasena;
+          this.personaService.contraseniaDto.codigoContrasenias = res.data.length + 1; 
+          this.myApiService.insertarContrasenias(this.personaService.contraseniaDto).subscribe((res)=> {
+            console.log(res);
+          })
+        }
+        return tf;
+      })
+    );
+  }
+}  

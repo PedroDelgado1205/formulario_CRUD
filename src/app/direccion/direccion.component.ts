@@ -97,7 +97,7 @@ export class DireccionComponent {
         let idH = params['hi'];
       this.personaService.setIdHistorial(parseInt(idH))
       })
-      let mensaje = ' Contacto Agregado';
+      let mensaje = '-Contacto Agregado';
       this.editarMensaje(mensaje)
       this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
     }else{
@@ -131,7 +131,7 @@ export class DireccionComponent {
           let idH = params['hi'];
       this.personaService.setIdHistorial(parseInt(idH))
         })
-        let mensaje = ' Contacto Editado';
+        let mensaje = '-Contacto Editado';
         this.editarMensaje(mensaje)
       this.router.navigate(['/tablas',this.personaService.idUser,this.personaService.idHistorial]);
     }else{

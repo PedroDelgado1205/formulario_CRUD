@@ -19,9 +19,13 @@
         <button class="btn btn-danger" id="ver" (click)="verClave()"><i class="fas fa-eye" style="color: #264570;"></i></button>
     </div>
     <div class="input-group input-group-sm mb-3" id="contraRep" hidden="true">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Contraseña</span>
+        <span class="input-group-text" id="inputGroup-sizing-sm">Repita la Contraseña</span>
         <input [(ngModel)]="contrasenaR" id="contrasenaR" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" disabled="true">
-    </div>
+    </div>  
+    <div class="input-group input-group-sm mb-3" id="contrasenaAedi" hidden="true">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Escriba su contraseña actual</span>
+        <input [(ngModel)]="contrasenaAe" id="contrasenaAe" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+    </div>  
     <button type="submit" class="btn btn-primary" (click)="editar()">Editar perfil</button>
     <button type="submit" class="btn btn-primary" onclick="window.modalEliminacion.showModal();">Eliminar perfil</button>
 </section>
@@ -34,11 +38,17 @@
     <hr>
     <section>
         <div id="mensaje">
-            <h4>¿Está seguro que desea ELIMINAR este registro? Esto no se puede deshacer.</h4>
+            <h4>¿Está seguro que desea ELIMINAR su perfil? Esto no se puede deshacer.</h4>
+            <h6>Para ELIMINAR el perfil ingrese su contraseña</h6>
+        </div>
+        <div class="input-group input-group-sm mb-3" id="contraRep">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Escriba su contraseña</span>
+            <input [(ngModel)]="contrasenaA" id="contrasenaA" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
         </div>
         <div id="btnsGuardar">
-            <button type="button" class="btn btn-primary" onclick="window.modalEliminacion.close();" (click)="eliminar()">Guardar</button>
+            <button type="button" class="btn btn-primary" onclick="window.modalEliminacion.close();" (click)="validarEliminacion()">Guardar</button>
             <button type="button" class="btn btn-danger" onclick="window.modalEliminacion.close();">Cancelar</button>
         </div>
     </section>
 </dialog>
+
